@@ -21,7 +21,9 @@ error_reporting(E_ALL ^ E_WARNING);
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.all.min.js"></script>
+
 <script>
 $(document).ready(function() {
     var btn = $('#backToTop');
@@ -192,7 +194,8 @@ td {
                             <li
                                 style="font-size: 16px; font-weight: 600; text-align: left; padding-left: 20%; padding-right: 14%;">
                                 กรอกรหัสผ่านเดิม : <span style="padding-left: 33px;"><input class="txtidcard"
-                                        type="password" name="old_password" maxlength="13" required /></span>
+                                        type="password" name="old_password" pattern="^[a-zA-Z0-9\s]+$" maxlength="13"
+                                        required /></span>
                             </li><br>
                             <li
                                 style="font-size: 16px; font-weight: 600; text-align: left; padding-left: 20%; padding-right: 14%;">

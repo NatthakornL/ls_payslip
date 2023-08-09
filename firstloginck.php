@@ -1,110 +1,130 @@
-<?Php
-/*
-include "include/session.php";
-
-include "connect.php";
-?>
 <!doctype html>
-
 <html>
 
+<head>
+    <!-- SweetAlert2 -->
+    <script type="text/javascript" src='../files/bower_components/sweetalert/js/sweetalert2.all.min.js'> </script>
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href='../files/bower_components/sweetalert/css/sweetalert2.min.css' media="screen" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบ E-PaySlip Lerdsin</title>
+</head>
+
 <body>
-    <?Php
-// check the login details of the user and stop execution if not logged in
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.all.min.js"></script>
+    <?php
+   session_start();
+   mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+   error_reporting(E_ALL ^ E_WARNING);
 
-///////Collect the form data /////
+   if(isset($_SESSION['noman']) && isset($_SESSION['idno'])){
+    include 'connect.php';
 
-$currentPassword=$_POST['currentPassword'];
-$confirm_password=$_POST['confirm_password'];
-$old_password=$_POST['old_password'];
-/////////////////////////
+   if(isset($_POST['old_password']) && isset($_POST['currentPassword']) && isset($_POST['confirm_password'])){
+    function validate($data){
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+    }
 
-if(isset($todo) and $todo=="change-password"){
-$status = "OK";
-$msg="";
+    $old_password = validate($_POST['old_password']);
+    $currentPassword = validate($_POST['currentPassword']);
+    $confirm_password = validate($_POST['confirm_password']);
 
-			
-$count=$dbo->prepare("select passc from tbmain where noman=:noman");
-$count->bindParam(":noman",$_SESSION['noman'],PDO::PARAM_STR, 15);
-$count->execute();
-$row = $count->fetch(PDO::FETCH_OBJ);
+    if(empty($old_password)){
+        echo "<script>
+        alert('กรุณาใส่รหัสผ่านเก่าด้วย!!!');
+        window.location = 'firstlogin.php'
+        </script>";        
+        exit();
+    }else if(empty($currentPassword)){
+        echo "<script>
+        alert('กรุณาใส่รหัสผ่านใหม่ด้วย!!!');
+        window.location = 'firstlogin.php'
+        </script>";        
+        exit();
+    }else if($currentPassword !== $confirm_password){
+        echo "<script>
+            alert('รหัสผ่านใหม่เเละยืนยันรหัสผ่านไม่ตรงกัน!!!');
+            window.location = 'firstlogin.php'
+            </script>";
+        exit();
+    }else{
+        $noman = $_SESSION['noman'];
 
+        $sql = "SELECT passc FROM tbmain WHERE noman='$noman' AND passc='$old_password' ";
+        $result = mysqli_query($connect, $sql);
 
-if($row->password<>$old_password){
-$msg=$msg."Your old password  is not matching as per our record.<BR>";
-$status= "NOTOK";
-}					
+        if(mysqli_num_rows($result) === 1 ){
 
-if ( strlen($currentPassword) < 8 or strlen($currentPassword) > 20 ){
-$msg=$msg."Password must be more than 8 char legth and maximum 20 char lenght<BR>";
-$status= "NOTOK";}					
+            $sql1 = "UPDATE tbmain SET passc='$currentPassword', chn='1', dayup=now() WHERE noman='$noman' ";
+            mysqli_query($connect, $sql1);
+            echo "<script>
+            alert('เเก้ไขรหัสผ่านเรียบร้อยเเล้ว!!!');
+            window.location = 'login.php'
+            </script>";            
+            exit();
+        }else{
+            echo "<script>
+            alert('รหัสผ่านเก่าไม่ถูกต้อง!!!');
+            window.location = 'firstlogin.php'
+            </script>";            
+            exit();
+        }
+    }
 
-if ( $currentPassword <> $confirm_password ){
-$msg=$msg."Both passwords are not matching<BR>";
-$status= "NOTOK";}					
-
-
-
-if($status<>"OK"){ 
-echo "<font size=4 color=red>$msg</font><br><center><input type='button' value='Retry' onClick='history.go(-1)'></center>";
-}else{ // if all validations are passed.
-$currentPassword=$currentPassword; // Encrypt the password before storing
-//if(mysql_query("update plus_signup set password='$password' where userid='$_SESSION[userid]'")){
-$sql=$dbo->prepare("update tbmain set passc=:password where noman='$_SESSION[noman]'");
-$sql->bindParam(':password',$currentPassword,PDO::PARAM_STR, 32);
-if($sql->execute()){
-echo "<font face='Verdana' size='4' ><center>Thanks <br> Your password changed successfully. Please keep changing your password for better security</font></center>";
-}else{echo "<font face='Verdana' size='2' color=red><center>Sorry <br> Failed to change password Contact Site Admin</font></center>";
-} // end of if else if updation of password is successful
-} // end of if else if status <>OK
-} // end of if else todo
+   }else{
+    header("Location: firstlogin.php");
+	exit();
+   } 
+   }else{
+    header("Location: login.php");
+     exit();
+   }
 
 ?>
-
-
 </body>
 
 </html>
-*/
-
+<!--
 session_start();
 include 'connect.php';
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 error_reporting(E_ALL ^ E_WARNING);
 
-/*
-$options = [
-'cost' => 10,
-];
-*/
-
-if(isset($_POST["change_password"])){
-
-$old_password = $_GET["old_password"];
+$noman = isset($_GET['noman']);
+$old_password = $_POST["old_password"];
 $currentPassword = $_POST["currentPassword"];
 $confirm_password = $_POST["confirm_password"];
 
+if(isset($_POST["change_password"])){
 
+$sql1 = "SELECT idno,passc FROM tbmain WHERE idno='$idno' AND passc='$passc'";
+$result = mysqli_query($connect,$sql1);
+$num = mysqli_num_rows($result);
 
-if($currentPassword == $confirm_password){
+if($num == 0){
+echo "<script>
+alert('Incorrect Old Password');
+</script>";
+die("<script>
+alert('Old password incorrect');
+history.back();
+</script>");
+}else if($currentPassword == $confirm_password){
 
 $store_password = $currentPassword;
 
 $sql = "UPDATE tbmain SET passc = '" .$store_password."' , chn='1', dayup=now() WHERE
 noman = '"
-.$_SESSION["noman"]. "'
+.$_SESSION["noman"]. "' AND passc='$passc'
 ";
 mysqli_query($connect, $sql);
 
-echo "
-<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
-
-";
-
-/*echo "<script>
-alert('เปลี่ยนรหัสผ่านเรียบร้อยเเล้ว!!!');
-window.location = 'login.php'
-</script>";*/
 echo "<script>
 alert('เเก้ไขรหัสผ่านเรียบร้อยเเล้ว!!!');
 window.location = 'login.php'
@@ -123,6 +143,52 @@ alert('รหัสผ่านไม่ถูกต้อง!!!กรุณา�
 window.location = 'firstlogin.php'
 </script>";
 }
+*/
 
-//window.location = 'firstlogin.php'
-?>
+/*
+session_start();
+include 'connect.php';
+mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+error_reporting(E_ALL ^ E_WARNING);
+
+$noman = isset($_GET['noman']);
+$old_password = $_POST["old_password"];
+$currentPassword = $_POST["currentPassword"];
+$confirm_password = $_POST["confirm_password"];
+
+if(isset($_POST["change_password"])){
+if($old_password!="" && $currentPassword!=""){// กรอกทั้งสองมาแล้ว
+
+$sql = "UPDATE tbmain SET passc = '" .$store_password."' , chn='1', dayup=now() WHERE
+noman = '"
+.$_SESSION["noman"]. "' AND passc='$passc'
+";
+if($mysqli->query($sql_update)){ // มีการคิวรี่อัพเพทข้อมูล
+if($mysqli->affected_rows>0){ // การคิวรี่มีการเปลี่ยนแปลงค่า
+echo "<script>
+alert('เเก้ไขรหัสผ่านเรียบร้อยเเล้ว!!!');
+window.location = 'login.php'
+</script>";// แจ้งแก้ไขรหัสผ่านเรียบร้อยแล้ว
+}else{ // การคิวรี่ไม่มีการเปลี่ยนแปลงค่า เช่น กรณีเราอัพเดทค่าเดิม
+echo "<script>
+alert('กรุณาใส่รหัสผ่านที่ไม่ซ้ำกับรหัสผ่านเดิม!!!');
+window.location = 'firstlogin.php'
+</script>";// แจ้งให้เปลี่ยนรหัสผ่านใหม่ ไม่ซ้ำรหัสผ่านเดิม
+}
+}else{
+echo "<script>
+alert('รหัสผ่านเดิมไม่ถูกต้อง!!!');
+window.location = 'firstlogin.php'
+</script>";// แจ้งรหัสผ่านเก่าไม่ถูกต้อง
+}
+
+
+}else{
+echo "<script>
+alert('กรุณาใส่รหัสผ่านเดิม เเละรหัสผ่านใหม่ด้วย!!!');
+window.location = 'firstlogin.php'
+</script>";// เตือนให้กรอกทั้ง pw เก่า และใหม่ ที่จะแก้ไข
+}
+}
+
+-->
