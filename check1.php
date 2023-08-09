@@ -26,30 +26,28 @@ session_destroy();
     </script>";
 */
 ?>
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.all.min.js"></script>
+    <script src='https://cdn.jsdelivr.net/npm/sweetalert2'></script>
     <script>
-    $(function() {
-        Swal.fire({
-            position: 'center',
-            icon: 'error',
-            title: 'เข้าสู่ระบบไม่ถูกต้อง!!!',
-            showConfirmButton: false,
-            timer: 2000,
-            didOpen: () => {
-                Swal.showLoading()
-                const b = Swal.getHtmlContainer().querySelector('b')
-                timerInterval = setInterval(() => {
-                    b.textContent = Swal.getTimerLeft()
-                }, 100)
-            },
-            willClose: () => {
-                clearInterval(timerInterval)
-            }
-        }).then(function() {
-            window.location = "./login.php";
-        })
-
+    Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'เข้าสู่ระบบไม่ถูกต้อง!!!',
+        showConfirmButton: false,
+        timer: 2000,
+        didOpen: () => {
+            Swal.showLoading()
+            const b = Swal.getHtmlContainer().querySelector('b')
+            timerInterval = setInterval(() => {
+                b.textContent = Swal.getTimerLeft()
+            }, 100)
+        },
+        willClose: () => {
+            clearInterval(timerInterval)
+        }
+    }).then((result) => {
+        if (result.value) {
+            location.href = "login.php";
+        }
     });
     </script>
 </body>
