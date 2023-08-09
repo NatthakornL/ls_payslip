@@ -1,6 +1,6 @@
 <?php
 // Load the database configuration file
-include_once 'connect.php';
+include_once 'connect1.php';
 
 if(isset($_POST['importmain'])){
     

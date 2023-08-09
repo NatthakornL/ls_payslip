@@ -3,8 +3,8 @@ session_id();
 session_start();
 include "connect.php";
 include "check.php";
-include("session_expire.php");
-setSessionTime(300,"login.php",null,$_SESSION['idno'],true);
+//include("session_expire.php");
+//setSessionTime(300,"login.php",null,$_SESSION['idno'],true);
 error_reporting(E_ALL ^ E_WARNING);
 ?>
 
@@ -345,9 +345,9 @@ error_reporting(E_ALL ^ E_WARNING);
                                 </li>
                                 <!--------------------LINKZONE---------------------->
                                 <div style="display: flex; justify-items: center; justify-content: center;">
-                                    <button class="btn btn--radius-2 btn--orange" type="button"><a href="imupcsv.php"
-                                            style="color: #fff;"
-                                            onclick="//return confirm('กดยืนยันเพื่อไปยังหน้าเปลี่ยนรหัสผ่าน');">เพิ่มข้อมูล</a></button>
+                                    <input class="btn btn--radius-2 btn--orange" type="hidden"><a href="imupcsv.php"
+                                        style="color: #fff;"
+                                        onclick="//return confirm('กดยืนยันเพื่อไปยังหน้าเปลี่ยนรหัสผ่าน');">เพิ่มข้อมูล</a></input>
 
                                     <button class="btn btn--radius-2 btn--red" type="button"><a href="logout.php"
                                             style="color: #fff;"

@@ -294,7 +294,7 @@ if(!empty($_GET['status'])){
                     </header>
                     <div
                         style="margin-top: 10px; padding: 1%; width: 100%; height: auto; border: 1px solid #FF6100; border-radius: 10px;">
-                        <form method="post" action="csvupload.php" enctype="multipart/form-data" name="form1"><br>
+                        <form method="post" action="csvupload1.php" enctype="multipart/form-data" name="form1"><br>
                             <!-- Display status message -->
                             <?php if(!empty($statusMsg)){ ?>
                             <div class="col-xs-12">
@@ -319,6 +319,14 @@ if(!empty($_GET['status'])){
                                 </li>
 
                             </div>
+                        </form>
+                        <form method="post" action="csvupload1.php" enctype="multipart/form-data" name="form1"><br>
+                            <!-- Display status message -->
+                            <?php if(!empty($statusMsg)){ ?>
+                            <div class="col-xs-12">
+                                <div class="alert <?php echo $statusType; ?>"><?php echo $statusMsg; ?></div>
+                            </div>
+                            <?php } ?>
                             <div style="width: 100%; display: flex;">
                                 <li
                                     style="font-size: 20px; font-weight: 600; text-align: left; width: 100%; margin: 1%;">
