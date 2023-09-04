@@ -1,65 +1,182 @@
-<?php
-// Load the database configuration file
-include_once 'connect1.php';
+<!DOCTYPE html>
+<html lang="en">
 
-if(isset($_POST['importmain'])){
-    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+    <title>Lerdsin E-Payslip</title>
+</head>
+
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.all.min.js"></script>
+
+    <?php
+// include mysql database configuration file
+include_once 'connect.php';
+/** Error reporting */
+error_reporting(E_ALL);
+ini_set('display_errors', TRUE);
+ini_set('display_startup_errors', TRUE);
+ 
+if (isset($_POST['importmain']))
+{
+ 
     // Allowed mime types
-    $csvMimes = array('text/x-comma-separated-values', 'text/comma-separated-values', 'application/octet-stream', 'application/vnd.ms-excel', 'application/x-csv', 'text/x-csv', 'text/csv', 'application/csv', 'application/excel', 'application/vnd.msexcel', 'text/plain');
-    
-    // Validate whether selected file is a CSV file
-    if(!empty($_FILES['file']['name']) && in_array($_FILES['file']['type'], $csvMimes)){
-        
-        // If the file is uploaded
-        if(is_uploaded_file($_FILES['file']['tmp_name'])){
-            
-            // Open uploaded CSV file with read-only mode
-            $csvFile = fopen($_FILES['file']['tmp_name'], 'r');
-            
-            // Skip the first line
-            fgetcsv($csvFile);
-            
-            // Parse data from CSV file line by line
-            while(($line = fgetcsv($csvFile)) !== FALSE){
-                // Get row data
-                $noman   = $line[0];
-                $prename  = $line[1];
-                $nname  = $line[2];
-                $lname = $line[3];
-                $nobank = $line[4];
-                $idno = $line[5];
-                $nposit = $line[6];
-                $noffice = $line[7];
-                $passc = $line[8];
-                $cbank = $line[9];
-                $mbphone = $line[10];
-                $dayup = $line[11];
-                $chn = $line[12];
-                
-                // Check whether tbmain already exists in the database with the same idno
-                $prevQuery = "SELECT noman FROM tbmain WHERE idno = '".$line[5]."'";
-                $prevResult = $connect->query($prevQuery);
-                
-                if($prevResult->num_rows > 0){
-                    // Update member data in the database
-                    $connect->query("UPDATE tbmain SET noman = '".$noman."', prename = '".$prename."', nname = '".$nname."', lname = '".$lname."', nobank = '".$nobank."', idno = '".$idno."', nposit = '".$nposit."', noffice = '".$noffice."', passc = '".$passc."', cbank = '".$cbank."', mbphone = '".$mbphone."', dayup = NOW() WHERE noman = '".$noman."'");
-                }else{
-                    // Insert member data in the database
-                    $connect->query("INSERT INTO tbmain (noman, prename, nname, lname, nobank, idno, nposit, noffice, passc, cbank, mbphone, dayup, chn) VALUES ('".$line[0]."', '".$line[1]."', '".$line[2]."', '".$line[3]."', '".$line[4]."', '".$line[5]."', '".$line[6]."', '".$line[7]."', '".$line[8]."', '".$line[9]."', '".$line[10]."', '".$line[11]."', '".$line[12]."',)");
-                }
-            }
-            
-            // Close opened CSV file
-            fclose($csvFile);
-            
-            $qstring = '?status=succ';
-        }else{
-            $qstring = '?status=err';
-        }
-    }else{
-        $qstring = '?status=invalid_file';
-    }
-}
+    $fileMimes = array(
+        'text/x-comma-separated-values',
+        'text/comma-separated-values',
+        'application/octet-stream',
+        'application/vnd.ms-excel',
+        'application/x-csv',
+        'text/x-csv',
+        'text/csv',
+        'application/csv',
+        'application/excel',
+        'application/vnd.msexcel',
+        'text/plain'
+    );    
 
-// Redirect to the listing page
-header("Location: admin.php".$qstring);
+    // Validate whether selected file is a CSV file
+    if(!empty($_FILES['file']['name']) && in_array($_FILES['file']['type'], $fileMimes))
+    {
+        //if the file is uploaded
+        if(is_uploaded_file($_FILES['file']['tmp_name'])){
+        
+        //Open uploaded CSV file with read-only mode
+        $csvFile = fopen($_FILES['file']['tmp_name'], 'r');
+
+        //skip the first line
+        fgetcsv($csvFile);
+
+        // Parse data from CSV file line by line
+        while (($getData = fgetcsv($csvFile, 10000, ",")) !== FALSE)
+        {
+            // Get row data
+            $noman = $getData[0];
+            $prename = $getData[1];
+            $nname = $getData[2];
+            $lname = $getData[3];
+            $nobank = $getData[4];
+            $idno = $getData[5];
+            $nposit = $getData[6];
+            $noffice = $getData[7];
+            $passc = $getData[8];
+            $cbank = $getData[9];
+            $mbphone = $getData[10];
+            $dayup = $getData[11];
+            $chn = $getData[12]; 
+
+            //ถ้าผู้ใช้มีข้อมูลใน database เเล้ว เทียบข้อมูลที่เหมือนกัน
+            //เเละทำการอัพเดทข้อมูลใหม่
+            //ข้อมูลไหนที่ไม่เหมือนเดิมจะทำการอัพอันใหม่เข้าไป
+            $query = "SELECT noman FROM tbmain WHERE idno = '" . $getData[5] . "'";
+            $check = mysqli_query($connect, $query);
+
+            if ($check->num_rows > 0)
+            {
+                // Update member data in the database
+                $mainup = "UPDATE tbmain SET noman = '" . $noman . "', prename = '" . $prename . "', nname = '" . $nname . "', lname = '" . $lname . "', nobank = '" . $nobank . "', idno = '" . $idno . "', nposit = '" . $nposit . "', noffice = '" . $noffice . "', passc = '" . $passc . "', cbank = '" . $cbank . "', mbphone = '" . $mbphone . "', dayup = NOW(), chn = '" . $chn . "' WHERE idno = '".$idno."' ";
+                mysqli_query($connect, $mainup);
+                unset($mainup);
+            }
+            else
+            {
+                // Insert member data in the database
+                
+                $mainins = "REPLACE INTO tbmain (noman, prename, nname, lname, nobank, idno, nposit, noffice, passc, cbank, mbphone, dayup, chn) VALUES ('" . $noman . "', '" . $prename . "', '" . $nname . "', '" . $lname . "', '" . $nobank . "', '" . $idno . "', '" . $nposit . "', '" . $noffice . "', '" . $passc . "', '" . $cbank . "', '" . $mbphone . "', NOW(), '" . $chn . "') ";
+                 mysqli_query($connect, $mainins);
+                 unset($mainins);
+            }
+        }
+
+        // Close opened CSV file
+        fclose($csvFile);
+
+        echo "<script>
+        $(function() {
+    
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'อัพเดทข้อมูลของหนักงานเรียบร้อยเเล้ว!!!',
+                showConfirmButton: false,
+                timer: 2000,
+                didOpen: () => {
+                    Swal.showLoading()
+                    const b = Swal.getHtmlContainer().querySelector('b')
+                    timerInterval = setInterval(() => {
+                        b.textContent = Swal.getTimerLeft()
+                    }, 100)
+                },
+                willClose: () => {
+                    clearInterval(timerInterval)
+                }
+            }).then(function() {
+                window.location = 'admin.php';
+            })
+        });
+        </script>";
+     
+}
+else
+{
+    echo "<script>
+        $(function() {
+    
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'อัพเดทข้อมูลของพนักงานไม่สำเร็จ!!!',
+                showConfirmButton: false,
+                timer: 2000,
+                didOpen: () => {
+                    Swal.showLoading()
+                    const b = Swal.getHtmlContainer().querySelector('b')
+                    timerInterval = setInterval(() => {
+                        b.textContent = Swal.getTimerLeft()
+                    }, 100)
+                },
+                willClose: () => {
+                    clearInterval(timerInterval)
+                }
+            }).then(function() {
+                window.location = 'imupcsv.php';
+            })
+        });
+        </script>";
+    }
+}else{
+    echo "<script>
+        $(function() {
+    
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'ไม่พบไฟล์ข้อมูลของพนักงาน!!!',
+                showConfirmButton: false,
+                timer: 2000,
+                didOpen: () => {
+                    Swal.showLoading()
+                    const b = Swal.getHtmlContainer().querySelector('b')
+                    timerInterval = setInterval(() => {
+                        b.textContent = Swal.getTimerLeft()
+                    }, 100)
+                },
+                willClose: () => {
+                    clearInterval(timerInterval)
+                }
+            }).then(function() {
+                window.location = 'imupcsv.php';
+            })
+        });
+        </script>";
+}
+}
+mysqli_close($connect);
+?>
+
+</body>
+
+</html>

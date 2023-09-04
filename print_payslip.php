@@ -55,7 +55,42 @@ date_default_timezone_set("Asia/Bangkok");
                             <td style="width: 50%;">
                                 <li style="font-size: 14px; display: flex; width: 100%;">ประจำเดือน : <span
                                         style="padding-left: 1%;">
-                                        <span id="">มิถุนายน</span>
+                                        <span id=""><?php if($_SESSION["mm"]=='1'){
+                                echo "มกราคม";
+                            }else if($_SESSION["mm"]=='2'){
+                                echo "กุมภาพันธ์";
+                            }else if ($_SESSION["mm"]=='3'){
+                                echo "มีนาคม";
+                            }
+                            else if ($_SESSION["mm"]=='4'){
+                                echo "เมษายน";
+                            }
+                            else if ($_SESSION["mm"]=='5'){
+                                echo "พฤษภาคม";
+                            }
+                            else if ($_SESSION["mm"]=='6'){
+                                echo "มิถุนายน";
+                            }
+                            else if ($_SESSION["mm"]=='7'){
+                                echo "กรกฎาคม";
+                            }
+                            else if ($_SESSION["mm"]=='8'){
+                                echo "สิงหาคม";
+                            }
+                            else if ($_SESSION["mm"]=='9'){
+                                echo "กันยายน";
+                            }
+                            else if ($_SESSION["mm"]=='10'){
+                                echo "ตุลาคม";
+                            }
+                            else if ($_SESSION["mm"]=='11'){
+                                echo "พฤศจิกายน";
+                            }
+                            else if ($_SESSION["mm"]=='12'){
+                                echo "ธันวาคม";
+                            }else{
+                                exit();
+                            } ?></span>
                                         พ.ศ.2566
                                     </span></li>
                                 <li style="font-size: 14px; display: flex; width: 100%;">ชื่อ-สกุล : <span

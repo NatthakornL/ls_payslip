@@ -345,9 +345,9 @@ error_reporting(E_ALL ^ E_WARNING);
                                 </li>
                                 <!--------------------LINKZONE---------------------->
                                 <div style="display: flex; justify-items: center; justify-content: center;">
-                                    <input class="btn btn--radius-2 btn--orange" type="hidden"><a href="imupcsv.php"
-                                        style="color: #fff;"
-                                        onclick="//return confirm('กดยืนยันเพื่อไปยังหน้าเปลี่ยนรหัสผ่าน');">เพิ่มข้อมูล</a></input>
+                                    <button class="btn btn--radius-2 btn--orange" type="button"><a href="imupcsv.php"
+                                            style="color: #fff;"
+                                            onclick="return confirm('กดยืนยันเพื่อไปยังหน้าเพิ่มข้อมูล');">เพิ่มข้อมูล</a></button>
 
                                     <button class="btn btn--radius-2 btn--red" type="button"><a href="logout.php"
                                             style="color: #fff;"

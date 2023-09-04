@@ -132,7 +132,7 @@ if(isset($_POST['idno'])){
                                                 style="font-size: 16px; font-weight: 600; text-align: left; padding-left: 14%;">
                                                 รหัสบัตรประชาชน : <span style="padding-left: 5px;"><input
                                                         class="txtidcard" type="text" name="idno" maxlength="13"
-                                                        required="" /></span>
+                                                        title="กรุณาใส่รหัสบัตรประชาชน" required="" /></span>
                                             </li><br>
                                             <li
                                                 style="font-size: 16px; font-weight: 600; text-align: left; padding-left: 14%;">
