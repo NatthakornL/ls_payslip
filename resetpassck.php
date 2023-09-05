@@ -1,4 +1,22 @@
-<?php
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <!--<button type="button" id="alert">Alert</button>-->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.all.min.js"></script>
+
+
+    <?php
 session_id();
 session_start();
 include 'connect.php';
@@ -34,16 +52,56 @@ if(isset($_POST['reset_password'])){
     if($up)
     {
         echo "<script>
-        alert('ทำการรีเซ็ตรหัสผ่านเรียบร้อยเเล้ว!!!');
-        window.location = 'admin.php';
-</script>";
+        $(function() {
+    
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'รีเซ็ตรหัสผ่านเรียบร้อยเเล้ว!!!',
+                showConfirmButton: false,
+                timer: 2000,
+                didOpen: () => {
+                    Swal.showLoading()
+                    const b = Swal.getHtmlContainer().querySelector('b')
+                    timerInterval = setInterval(() => {
+                        b.textContent = Swal.getTimerLeft()
+                    }, 100)
+                },
+                willClose: () => {
+                    clearInterval(timerInterval)
+                }
+            }).then(function() {
+                window.location = 'admin.php';
+            })
+        });
+        </script>";
     }
     else
     {
         echo "<script>
-        alert('รีเซ็ตรหัสผ่านไม่สำเร็จ!!!');
-        window.location = 'resetpass.php'
-</script>";
+        $(function() {
+    
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'ไม่สามารถรีเซ็ตรหัสผ่านได้สำเร็จ!!!',
+                showConfirmButton: false,
+                timer: 2000,
+                didOpen: () => {
+                    Swal.showLoading()
+                    const b = Swal.getHtmlContainer().querySelector('b')
+                    timerInterval = setInterval(() => {
+                        b.textContent = Swal.getTimerLeft()
+                    }, 100)
+                },
+                willClose: () => {
+                    clearInterval(timerInterval)
+                }
+            }).then(function() {
+                window.location = 'resetpass.php';
+            })
+        });
+        </script>";
     }
 }/*else{
     echo "<script>
@@ -53,6 +111,9 @@ if(isset($_POST['reset_password'])){
 }*/
 }
 ?>
+</body>
+
+</html>
 
 
 <!--===================== COMMENT ZONE =============================-->

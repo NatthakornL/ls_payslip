@@ -21,7 +21,7 @@ if(isset($_POST['idno'])){
     <title>ระบบ E-PaySlip Lerdsin</title>
     <!--stylesheet-->
     <script type="text/javascript" src="scripts.js"></script>
-    <link rel="stylesheet" href="style1.css" />
+    <link rel="stylesheet" href="style1.css" media="all" />
     <link href="https://emoji-css.afeld.me/emoji.css" rel="stylesheet">
     <!---------- Sweetalert --------->
     <script src="dist/sweetalert.min.js"></script>
@@ -106,7 +106,7 @@ if(isset($_POST['idno'])){
                         <!--card body-->
                         <header>
                             <div class="top" style="margin-bottom: 1%;">
-                                <div class="logo"><img src="./images/logoheader.jpg" />
+                                <div class="logo"><img src="./images/logoheader.jpg" width="800" height="120" />
                                 </div>
                             </div>
                         </header>

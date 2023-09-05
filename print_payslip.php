@@ -91,7 +91,7 @@ date_default_timezone_set("Asia/Bangkok");
                             }else{
                                 exit();
                             } ?></span>
-                                        พ.ศ.2566
+                                        พ.ศ.<?php echo ''.$_SESSION["yy"]. ' '; ?>
                                     </span></li>
                                 <li style="font-size: 14px; display: flex; width: 100%;">ชื่อ-สกุล : <span
                                         style="padding-left: 1%;"></span> <?php echo ''.$_SESSION["nname"]. ' '; ?></li>

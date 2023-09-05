@@ -32,6 +32,20 @@
 /* Smartphones (portrait and landscape) ----------- */
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
   /* Styles */
+  .logo {
+    width: 100%;
+    height: auto;
+    align-items: center;
+    /*cursor: pointer;*/
+  }
+  .logo img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: 50% 50%;
+  }
 }
 
 /* Smartphones (landscape) ----------- */
@@ -123,14 +137,16 @@ body {
 }
 .logo {
   width: 100%;
-  height: 180px;
+  height: auto;
   align-items: center;
   /*cursor: pointer;*/
 }
 .logo img {
   width: 100%;
-  height: 180px;
+  height: auto;
   border-radius: 10px;
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 /* ==========================================================================
