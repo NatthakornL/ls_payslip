@@ -34,7 +34,7 @@ if(isset($_GET['noman'])){
 $status = "";
 if(isset($_POST['reset_password'])){
 
-    $noman = $_SESSION['noman'];
+    //$noman = $_SESSION['noman'];
     $resetPassword = $_POST['resetPassword'];
     $confirm_reset = $_POST['confirm_reset'];
 

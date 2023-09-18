@@ -1,9 +1,6 @@
 <?php 
 session_start();
 require "connect.php";
-include "check.php";
-include("session_expire.php");
-setSessionTime(300,"login.php",null,$_SESSION['idno'],true);
 error_reporting(E_ALL ^ E_WARNING); 
 $noman = $_REQUEST['noman'];
 
