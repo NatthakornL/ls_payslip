@@ -163,10 +163,6 @@ error_reporting(E_ALL ^ E_WARNING);
                                 <button class="btn btn--radius-2 btn--red" type="button"><a href="logout.php"
                                         style="color: #fff;"
                                         onclick="return confirm('ยืนยันการออกจากระบบ');">ออกจากระบบ</a></button>
-                                <button class="btn btn--radius-2 btn--blue" type="button"><a href="login_admin.php"
-                                        style="color: #fff;"
-                                        onclick="return confirm('กดยืนยันเพื่อไปยังหน้าในส่วนของ Admin');">ส่วน
-                                        Admin</a></button>
                             </div>
                         </form>
                     </div><br>

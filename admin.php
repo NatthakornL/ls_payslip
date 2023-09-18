@@ -2,9 +2,6 @@
 session_id();
 session_start();
 include "connect.php";
-include "check.php";
-include("session_expire.php");
-setSessionTime(300,"login.php",null,$_SESSION['idno'],true);
 error_reporting(E_ALL ^ E_WARNING);
 ?>
 
@@ -322,8 +319,8 @@ error_reporting(E_ALL ^ E_WARNING);
                                     style="padding-left: 29.5%; text-align: center; font-size: 16px; display: flex; width: 100%; ">
                                     <span style="font-weight: 600; width: 18%; ">ชื่อ - นามสกุล :
                                     </span>
-                                    <span
-                                        style="width: 50%; text-align: left; padding-right: 3%; "><?php echo ''.$_SESSION["nname"]. ' '; ?>
+                                    <span style="width: 50%; text-align: left; padding-right: 3%; ">ทดสอบระบบ
+                                        อัพเดทข้อมูล
                                     </span>
                                 </li>
                                 <li
