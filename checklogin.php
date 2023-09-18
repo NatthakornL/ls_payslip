@@ -1,4 +1,22 @@
-<?php 
+<!doctype html>
+<html>
+
+<head>
+    <!-- SweetAlert2 -->
+    <script type="text/javascript" src='../files/bower_components/sweetalert/js/sweetalert2.all.min.js'> </script>
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href='../files/bower_components/sweetalert/css/sweetalert2.min.css' media="screen" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบ E-PaySlip Lerdsin</title>
+</head>
+
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.all.min.js"></script>
+
+    <?php 
 session_start();
         if(isset($_POST['submit'])){
             include("connect.php");
@@ -85,18 +103,62 @@ session_start();
                 }else{
                     session_destroy();
                     echo "<script>
-                    alert('รหัสผ่านไม่ถูกต้อง!!!');
-                    window.location = 'login.php'
+                    $(function() {
+                
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'error',
+                            title: 'รหัสผ่านไม่ถูกต้อง!!!',
+                            showConfirmButton: false,
+                            timer: 2000,
+                            didOpen: () => {
+                                Swal.showLoading()
+                                const b = Swal.getHtmlContainer().querySelector('b')
+                                timerInterval = setInterval(() => {
+                                    b.textContent = Swal.getTimerLeft()
+                                }, 100)
+                            },
+                            willClose: () => {
+                                clearInterval(timerInterval)
+                            }
+                        }).then(function() {
+                            window.location = 'login.php';
+                        })
+                    });
                     </script>";
                 }
                 }else{
 
                     session_destroy();
                     echo "<script>
-                    alert('ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง!!!');
-                    window.location = 'login.php'
+                    $(function() {
+                
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'error',
+                            title: 'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง!!!',
+                            showConfirmButton: false,
+                            timer: 2000,
+                            didOpen: () => {
+                                Swal.showLoading()
+                                const b = Swal.getHtmlContainer().querySelector('b')
+                                timerInterval = setInterval(() => {
+                                    b.textContent = Swal.getTimerLeft()
+                                }, 100)
+                            },
+                            willClose: () => {
+                                clearInterval(timerInterval)
+                            }
+                        }).then(function() {
+                            window.location = 'login.php';
+                        })
+                    });
                     </script>";
                     //user & password incorrect back to login again
         }
     }
 ?>
+
+</body>
+
+</html>

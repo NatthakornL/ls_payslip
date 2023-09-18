@@ -64,14 +64,54 @@
             $sql1 = "UPDATE tbmain SET passc='$currentPassword', chn='1', dayup=now() WHERE noman='$noman' ";
             mysqli_query($connect, $sql1);
             echo "<script>
-            alert('เเก้ไขรหัสผ่านเรียบร้อยเเล้ว!!!');
-            window.location = 'login.php'
+            $(function() {
+        
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'เเก้ไขรหัสผ่านเรียบร้อยเเล้ว!!!',
+                    showConfirmButton: false,
+                    timer: 2000,
+                    didOpen: () => {
+                        Swal.showLoading()
+                        const b = Swal.getHtmlContainer().querySelector('b')
+                        timerInterval = setInterval(() => {
+                            b.textContent = Swal.getTimerLeft()
+                        }, 100)
+                    },
+                    willClose: () => {
+                        clearInterval(timerInterval)
+                    }
+                }).then(function() {
+                    window.location = 'login.php';
+                })
+            });
             </script>";            
             exit();
         }else{
             echo "<script>
-            alert('รหัสผ่านเก่าไม่ถูกต้อง!!!');
-            window.location = 'firstlogin.php'
+            $(function() {
+        
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: 'รหัสผ่านไม่ถูกต้อง!!!',
+                    showConfirmButton: false,
+                    timer: 2000,
+                    didOpen: () => {
+                        Swal.showLoading()
+                        const b = Swal.getHtmlContainer().querySelector('b')
+                        timerInterval = setInterval(() => {
+                            b.textContent = Swal.getTimerLeft()
+                        }, 100)
+                    },
+                    willClose: () => {
+                        clearInterval(timerInterval)
+                    }
+                }).then(function() {
+                    window.location = 'firstlogin.php';
+                })
+            });
             </script>";            
             exit();
         }

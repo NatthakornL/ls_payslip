@@ -132,7 +132,7 @@ error_reporting(E_ALL ^ E_WARNING);
 
                             <li
                                 style="padding-left: 29.5%; text-align: center; font-size: 16px; display: flex; width: 100%; ">
-                                <span style="font-weight: 600; width: 16%; ">ชื่อ - นามสกุล :
+                                <span style="font-weight: 600; width: 18%; ">ชื่อ - นามสกุล :
                                 </span>
                                 <span
                                     style="width: 50%; text-align: left; padding-right: 3%; "><?php echo ''.$_SESSION["nname"]. ' '; ?>
@@ -163,6 +163,10 @@ error_reporting(E_ALL ^ E_WARNING);
                                 <button class="btn btn--radius-2 btn--red" type="button"><a href="logout.php"
                                         style="color: #fff;"
                                         onclick="return confirm('ยืนยันการออกจากระบบ');">ออกจากระบบ</a></button>
+                                <button class="btn btn--radius-2 btn--blue" type="button"><a href="login_admin.php"
+                                        style="color: #fff;"
+                                        onclick="return confirm('กดยืนยันเพื่อไปยังหน้าในส่วนของ Admin');">ส่วน
+                                        Admin</a></button>
                             </div>
                         </form>
                     </div><br>

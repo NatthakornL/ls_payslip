@@ -164,7 +164,7 @@ function checkPassword(form) {
                                 </span>
                             </li><br>
                             <li style="margin-left: 20%; text-align: left; font-size: 16px; display: flex; width: 55%;">
-                                <span style="font-weight: 600; width: 27%; ">รหัสบัตรประชาชน
+                                <span style="font-weight: 600; width: 29%; ">รหัสบัตรประชาชน
                                     :
                                 </span>
                                 <span

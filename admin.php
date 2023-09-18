@@ -320,7 +320,7 @@ error_reporting(E_ALL ^ E_WARNING);
 
                                 <li
                                     style="padding-left: 29.5%; text-align: center; font-size: 16px; display: flex; width: 100%; ">
-                                    <span style="font-weight: 600; width: 16%; ">ชื่อ - นามสกุล :
+                                    <span style="font-weight: 600; width: 18%; ">ชื่อ - นามสกุล :
                                     </span>
                                     <span
                                         style="width: 50%; text-align: left; padding-right: 3%; "><?php echo ''.$_SESSION["nname"]. ' '; ?>
