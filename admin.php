@@ -1,6 +1,7 @@
 <?php 
 session_id();
 session_start();
+include "check_admin.php";
 include "connect.php";
 error_reporting(E_ALL ^ E_WARNING);
 ?>

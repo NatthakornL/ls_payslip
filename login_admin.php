@@ -1,9 +1,13 @@
 <?php
-session_start(); $password = $userError = $passError = '';
+
+session_start();
+ $password = $userError = $passError = '';
 if(isset($_POST['submit'])){
   $password = $_POST['password'];
   if($password === '1234'){
-    $_SESSION['login'] = true; header('LOCATION:admin.php'); die();
+    $_SESSION['loginAdmin'] = true; 
+    header('LOCATION:admin.php'); 
+    die();
   }
   
   if($password !== '1234'){
@@ -16,6 +20,29 @@ if(isset($_POST['submit'])){
 
 
 
+/*
+
+$password = '1234';
+
+if(isset($_POST['submit'])){
+    if($_POST['passwod'] == $password){
+        $_SESSION['adminLogged'] = true;
+        header('location: admin.php');
+        echo 'Pass';
+    }else {
+        header('location: login_admin.php');
+        echo 'not pass';
+    }
+}else {
+    $self = $_SERVER['PHP_SELF'];
+    $self = substr($self, strrpos($self, '/'));
+    if(!(isset($_SESSION['adminLogged']) && $_SESSION['adminLogged'] == true)){
+        if($self != '/login_admin.php'){
+            header('location: login_admin.php');
+        }
+    }
+}
+*/
 ?>
 
 
@@ -148,10 +175,9 @@ if(isset($_POST['submit'])){
                                                 รหัสผ่านเข้าสู่ระบบ : <span
                                                     style="background-color: #bdc3c7; width: 100%; height: auto;"><input
                                                         class="txtpass" type="password" id="password" name="password"
-                                                        value='<?php echo $password;?>' maxlength="16" required=""
-                                                        pattern="^[a-zA-Z0-9\s]+$"
+                                                        maxlength="16" required="" pattern="^[a-zA-Z0-9\s]+$"
                                                         title="กรุณากรอกตัวเลขเเละภาษาอังกฤษเท่านั้น" /></span></li><br>
-                                            <div class='error'><?php echo $passError;?></div>
+                                            <!--<div class='error'><?php //echo $passError;?></div>-->
 
                                             <li style="margin-top: 1%; margin-bottom: 1%;"><input class="btnaddata"
                                                     type="submit" name="submit" onclick="getShowLoad()"
