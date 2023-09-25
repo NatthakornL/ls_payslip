@@ -15,43 +15,36 @@
     <?php
 // include mysql database configuration file
 include_once 'connect.php';
+
+require_once 'vendor/autoload.php'; 
+use PhpOffice\PhpSpreadsheet\Reader\Xlsx; 
+
 /** Error reporting */
 error_reporting(E_ALL);
 ini_set('display_errors', TRUE);
 ini_set('display_startup_errors', TRUE);
  
-if (isset($_POST['importmain']))
+if (isset($_POST['importmain1']))
 {
  
     // Allowed mime types
-    $fileMimes = array(
-        'text/x-comma-separated-values',
-        'text/comma-separated-values',
-        'application/octet-stream',
-        'application/vnd.ms-excel',
-        'application/x-csv',
-        'text/x-csv',
-        'text/csv',
-        'application/csv',
-        'application/excel',
-        'application/vnd.msexcel',
-        'text/plain'
-    );    
+    $excelMimes = array('text/xls', 'text/xlsx', 'application/excel', 'application/vnd.msexcel', 'application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'); 
 
     // Validate whether selected file is a CSV file
-    if(!empty($_FILES['file']['name']) && in_array($_FILES['file']['type'], $fileMimes))
+    if(!empty($_FILES['file']['name']) && in_array($_FILES['file']['type'], $excelMimes))
     {
         //if the file is uploaded
         if(is_uploaded_file($_FILES['file']['tmp_name'])){
-        
-        //Open uploaded CSV file with read-only mode
-        $csvFile = fopen($_FILES['file']['tmp_name'], 'r');
+            $reader = new Xlsx(); 
+            $spreadsheet = $reader->load($_FILES['file']['tmp_name']); 
+            $worksheet = $spreadsheet->getActiveSheet();  
+            $worksheet_arr = $worksheet->toArray(); 
 
-        //skip the first line
-        fgetcsv($csvFile);
+            //Remove header row
+            unset($worksheet_arr[0]);
 
         // Parse data from CSV file line by line
-        while (($getData = fgetcsv($csvFile, 10000, ",")) !== FALSE)
+        foreach ($worksheet_arr as $getData)
         {
             // Get row data
             $noman = $getData[0];
@@ -91,8 +84,7 @@ if (isset($_POST['importmain']))
             }
         }
 
-        // Close opened CSV file
-        fclose($csvFile);
+        
 
         echo "<script>
         $(function() {

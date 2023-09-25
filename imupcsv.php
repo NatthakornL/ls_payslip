@@ -305,14 +305,15 @@ if(!empty($_GET['status'])){
                                 อัพโหลดไฟล์เพื่อเพิ่มข้อมูลลง Database<i class="em em-page_facing_up"
                                     aria-role="presentation" aria-label="PAGE FACING UP"></i></li>
                             <li style="font-size: 16px; font-weight: 600; text-align: center; color: #D80000;">
-                                [ ก่อนการอัพโหลดให้เเปลงไฟล์ excel เป็น ไฟล์ .csv ก่อนทุกครั้ง ]</li><br>
+                                [ ก่อนการอัพโหลดให้ตรวจสอบความถูกต้องของข้อมูล เช่น ชื่อ Column ให้ถูกต้องครับ
+                                อัพเป็นไฟล์ .xlsx ]</li><br>
                             <div style="width: 100%; display: flex;">
                                 <li
                                     style="font-size: 20px; font-weight: 600; text-align: left; width: 100%; margin: 1%;">
                                     Upload
                                     ผู้ใช้งาน :
-                                    <span style="margin: 0.4%;"><input type="file" name="file" accept=".csv">
-                                        <input id="" name="importmain" type="submit" data-loading-text="Loading..."
+                                    <span style="margin: 0.4%;"><input type="file" name="file" accept=".xlsx">
+                                        <input id="" name="importmain1" type="submit" data-loading-text="Loading..."
                                             value="submit"></span>
 
                                 </li>
@@ -331,7 +332,7 @@ if(!empty($_GET['status'])){
                                     style="font-size: 20px; font-weight: 600; text-align: left; width: 100%; margin: 1%;">
                                     Upload
                                     เงินเดือน :
-                                    <span><input id="" type="file" name="csv_file" accept=".csv">
+                                    <span><input id="" type="file" name="xlsx_file" accept=".xlsx">
                                         <input class="form-control" name="importdetail" type="submit"
                                             data-loading-text="Loading..." value="submit"></span>
 
