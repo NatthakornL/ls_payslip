@@ -85,7 +85,7 @@ if (isset($_POST['importdetail']))
             $last_update = $getData[52];
 
             // Check if the user already exists in the database with the same idno
-            $query = "SELECT nauto FROM tbdetail WHERE idno = '" . $getData[4] . "'";
+            $query = "SELECT nauto FROM tbdetail WHERE idno = '" . $getData[17] . "'";
             $check = mysqli_query($connect, $query);
 
             if ($check->num_rows > 0) {
