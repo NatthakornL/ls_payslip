@@ -79,7 +79,7 @@ if (isset($_POST['importmain1']))
             {
                 // Insert member data in the database
                 $mainins = "INSERT INTO tbmain (noman, prename, nname, lname, nobank, idno, nposit, noffice, passc, cbank, mbphone, dayup, chn) VALUES ('" . $noman . "', '" . $prename . "', '" . $nname . "', '" . $lname . "', '" . $nobank . "', '" . $idno . "', '" . $nposit . "', '" . $noffice . "', '" . $passc . "', '" . $cbank . "', '" . $mbphone . "', NOW(), '" . $chn . "') ";                
-                $mainins = "ON DUPLICATE KEY UPDATE  ";
+                
 
                 mysqli_query($connect, $mainins);
                 unset($mainins);
