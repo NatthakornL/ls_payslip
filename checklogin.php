@@ -8,6 +8,7 @@
     <link rel="stylesheet" href='../files/bower_components/sweetalert/css/sweetalert2.min.css' media="screen" />
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" type="image/x-icon" href="./images/icon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ระบบ E-PaySlip Lerdsin</title>
 </head>
@@ -64,6 +65,7 @@ session_start();
                 $_SESSION["exp3"] = $rowM["exp3"];
                 $_SESSION["exp4"] = $rowM["exp4"];
                 $_SESSION["exp5"] = $rowM["exp5"];
+                $_SESSION["exp5_1"] = $rowM["exp5_1"];
                 $_SESSION["exp6"] = $rowM["exp6"];
                 $_SESSION["exp7"] = $rowM["exp7"];
                 $_SESSION["exp8"] = $rowM["exp8"];
@@ -76,7 +78,7 @@ session_start();
                 $_SESSION["money5txt"] = $rowM["money5txt"];
                 $_SESSION["money6txt"] = $rowM["money6txt"];
                 $_SESSION["money10txt"] = $rowM["money10txt"];
-                $_SESSION["exp9txt"] = $rowM["money4txt"];
+                $_SESSION["exp9txt"] = $rowM["exp9txt"];
                 $_SESSION["daypay"] = $rowM["daypay"];
                 $_SESSION["note"] = $rowM["note"];
                 $_SESSION["remark"] = $rowM["remark"];

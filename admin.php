@@ -17,6 +17,7 @@ error_reporting(E_ALL ^ E_WARNING);
     <script type="text/javascript" src="scripts.js"></script>
     <link rel="stylesheet" href="style1.css" />
     <link href="https://emoji-css.afeld.me/emoji.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="./images/icon.ico">
     <link rel="stylesheet" href="assets/bootstrap/bootstrap.min.css">
     <!--======================= jQuery library ===========================-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
@@ -367,21 +368,28 @@ error_reporting(E_ALL ^ E_WARNING);
                                 <table border="1" bordercolor="#000" align="center" width="100%" border-collapse:
                                     collapse; style="margin: auto; overflow-x: hidden; padding-top: 30px; ">
                                     <li
-                                        style="text-align: center; font-size: 17px; font-weight: 600; color: red; padding-bottom: 1%;">
+                                        style="text-align: center; font-size: 17px; width: 100%; font-weight: 600; color: red; padding-bottom: 1%;">
                                         <i class="em em-exclamation" aria-role="presentation"
                                             aria-label="HEAVY EXCLAMATION MARK SYMBOL"></i>
-                                        เเสดงข้อมูลของผู้ใช้ทั้งหมด <i class="em em-exclamation"
+                                        เเสดงข้อมูลของพรักงานทั้งหมด <i class="em em-exclamation"
                                             aria-role="presentation" aria-label="HEAVY EXCLAMATION MARK SYMBOL"></i>
                                         <span style="font-size: 16; font-weight: 600;"></span>
+                                    </li>
+                                    <li
+                                        style="text-align: center; font-size: 14px; width: 100%; height: auto; margin-bottom: 1%; font-weight: 600; color: #888888; ">
+                                        จำนวณ
+                                        <span
+                                            style="font-size: 16; font-weight: 600; width: 2%; color: #FF6100;">XXXX</span>
+                                        <span style="font-size: 14; font-weight: 600;">คน</span>
                                     </li>
                                     <thead style="width: 100%; height: auto; border: 1px solid #000; ">
                                         <th style="width: 5%; border: 1px solid;">ลำดับ</th>
                                         <th style="width: 10%; border: 1px solid;">รหัสบัตรประชาชน</th>
-                                        <th style="width: 25%; border: 1px solid;">ชื่อ-นามสกุล</th>
-                                        <th style="width: 15%; border: 1px solid;">รหัสผ่าน</th>
+                                        <th style="width: 30%; border: 1px solid;">ชื่อ-นามสกุล</th>
+                                        <th style="width: 17%; border: 1px solid;">รหัสผ่าน</th>
 
                                         <th style="width: 20%; border: 1px solid;">ตำเเหน่ง</th>
-                                        <th style="width: 10%; border: 1px solid; font-size: 15px;">ลำดับผู้ใช้ <br>(0
+                                        <th style="width: 7%; border: 1px solid; font-size: 15px;">ลำดับผู้ใช้ <br>(0
                                             New , 1 Old)</th>
                                         <th style="width: 3%; border: 1px solid; font-size: 15px;"></th>
                                     </thead>
@@ -403,9 +411,12 @@ error_reporting(E_ALL ^ E_WARNING);
 ?>
                                         <tr>
                                             <td><?php echo $rsjobinfo['noman']; ?></td>
-                                            <td><?php echo $rsjobinfo['idno']; ?></td>
-                                            <td><?php echo $rsjobinfo['nname']; ?></td>
-                                            <td><?php echo $rsjobinfo["passc"] ?></td>
+                                            <td style="text-align: left; padding-left: 5px;">
+                                                <?php echo $rsjobinfo['idno']; ?></td>
+                                            <td style="text-align: left; padding-left: 4px;">
+                                                <?php echo $rsjobinfo['nname']; ?></td>
+                                            <td style="text-align: left; padding-left: 5px;">
+                                                <?php echo $rsjobinfo["passc"] ?></td>
                                             <!-- . $rsjobinfo["noman"] . ">" . $rsjobinfo["passc"]. -->
 
                                             <td><?php if($rsjobinfo["noffice"]=='0'){

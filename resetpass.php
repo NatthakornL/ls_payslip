@@ -20,6 +20,7 @@ $noman = $_REQUEST['noman'];
     <script type="text/javascript" src="scripts.js"></script>
     <link rel="stylesheet" href="style1.css" />
     <link href="https://emoji-css.afeld.me/emoji.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="./images/icon.ico">
     <script src="sweetalert2.min.js"></script>
     <link rel="stylesheet" href="sweetalert2.min.css">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

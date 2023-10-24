@@ -23,6 +23,7 @@ if(isset($_POST['idno'])){
     <script type="text/javascript" src="scripts.js"></script>
     <link rel="stylesheet" href="style1.css" media="all" />
     <link href="https://emoji-css.afeld.me/emoji.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="./images/icon.ico">
     <!---------- Sweetalert --------->
     <script src="dist/sweetalert.min.js"></script>
     <link rel="stylesheet" type="text/css" href="dist/sweetalert.css">

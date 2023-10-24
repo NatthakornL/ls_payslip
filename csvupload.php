@@ -70,17 +70,19 @@ if (isset($_POST['importmain1']))
             if ($check->num_rows > 0)
             {
                 // Update member data in the database
-                $mainup = "UPDATE tbmain SET noman = '" . $noman . "', prename = '" . $prename . "', nname = '" . $nname . "', lname = '" . $lname . "', nobank = '" . $nobank . "', idno = '" . $idno . "', nposit = '" . $nposit . "', noffice = '" . $noffice . "', passc = '" . $passc . "', cbank = '" . $cbank . "', mbphone = '" . $mbphone . "', dayup = NOW(), chn = '" . $chn . "' WHERE idno = '".$idno."' ";
+                $mainup = "UPDATE tbmain SET noman = '" . $noman . "', prename = '" . $prename . "', nname = '" . $nname . "', lname = '" . $lname . "', nobank = '" . $nobank . "', idno = '" . $idno . "', nposit = '" . $nposit . "', noffice = '" . $noffice . "', passc = '".$passc."', cbank = '" . $cbank . "', mbphone = '" . $mbphone . "', dayup = NOW(), chn = CONCAT(chn, ',$chn') WHERE idno = '".$idno."' ";
+                
                 mysqli_query($connect, $mainup);
                 unset($mainup);
             }
             else
             {
                 // Insert member data in the database
-                
-                $mainins = "REPLACE INTO tbmain (noman, prename, nname, lname, nobank, idno, nposit, noffice, passc, cbank, mbphone, dayup, chn) VALUES ('" . $noman . "', '" . $prename . "', '" . $nname . "', '" . $lname . "', '" . $nobank . "', '" . $idno . "', '" . $nposit . "', '" . $noffice . "', '" . $passc . "', '" . $cbank . "', '" . $mbphone . "', NOW(), '" . $chn . "') ";
-                 mysqli_query($connect, $mainins);
-                 unset($mainins);
+                $mainins = "INSERT INTO tbmain (noman, prename, nname, lname, nobank, idno, nposit, noffice, passc, cbank, mbphone, dayup, chn) VALUES ('" . $noman . "', '" . $prename . "', '" . $nname . "', '" . $lname . "', '" . $nobank . "', '" . $idno . "', '" . $nposit . "', '" . $noffice . "', '" . $passc . "', '" . $cbank . "', '" . $mbphone . "', NOW(), '" . $chn . "') ";                
+                $mainins = "ON DUPLICATE KEY UPDATE  ";
+
+                mysqli_query($connect, $mainins);
+                unset($mainins);
             }
         }
 
@@ -106,7 +108,7 @@ if (isset($_POST['importmain1']))
                     clearInterval(timerInterval)
                 }
             }).then(function() {
-                window.location = 'admin.php';
+                window.location = 'imupcsv.php';
             })
         });
         </script>";
@@ -172,3 +174,8 @@ mysqli_close($connect);
 </body>
 
 </html>
+
+<!-- 
+$mainins = "INSERT INTO tbmain (noman, prename, nname, lname, nobank, idno, nposit, noffice, passc, cbank, mbphone, dayup, chn) VALUES ('" . $noman . "', '" . $prename . "', '" . $nname . "', '" . $lname . "', '" . $nobank . "', '" . $idno . "', '" . $nposit . "', '" . $noffice . "', '" . $passc . "', '" . $cbank . "', '" . $mbphone . "', NOW(), '" . $chn . "') ";
+
+-->

@@ -39,6 +39,7 @@ if(!empty($_GET['status'])){
     <script type="text/javascript" src="scripts.js"></script>
     <link rel="stylesheet" href="style1.css" />
     <link href="https://emoji-css.afeld.me/emoji.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="./images/icon.ico">
     <link rel="stylesheet" href="assets/bootstrap/bootstrap.min.css">
     <!--======================= jQuery library ===========================-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>

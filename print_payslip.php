@@ -14,15 +14,13 @@ include "connect.php";
 error_reporting(E_ALL ^ E_WARNING); 
 date_default_timezone_set("Asia/Bangkok");
 
-
- 
-
 ?>
 
 <title>ระบบ E-PaySlip Lerdsin</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://emoji-css.afeld.me/emoji.css" rel="stylesheet">
+<link rel="icon" type="image/x-icon" href="./images/icon.ico">
 <link rel="stylesheet" href="card.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paper-css/0.3.0/paper.css">
 
@@ -55,7 +53,8 @@ date_default_timezone_set("Asia/Bangkok");
                             <td style="width: 50%;">
                                 <li style="font-size: 14px; display: flex; width: 100%;">ประจำเดือน : <span
                                         style="padding-left: 1%;">
-                                        <span id=""><?php if($_SESSION["mm"]=='1'){
+                                        <span id="">
+                                            <?php if($_SESSION["mm"]=='1'){
                                 echo "มกราคม";
                             }else if($_SESSION["mm"]=='2'){
                                 echo "กุมภาพันธ์";
@@ -91,7 +90,7 @@ date_default_timezone_set("Asia/Bangkok");
                             }else{
                                 exit();
                             } ?></span>
-                                        พ.ศ.<?php echo ''.$_SESSION["yy"]. ' '; ?>
+                                        พ.ศ. <?php echo ''.$_SESSION["yy"]. ' '; ?>
                                     </span></li>
                                 <li style="font-size: 14px; display: flex; width: 100%;">ชื่อ-สกุล : <span
                                         style="padding-left: 1%;"></span> <?php echo ''.$_SESSION["nname"]. ' '; ?></li>
@@ -191,9 +190,13 @@ date_default_timezone_set("Asia/Bangkok");
                             </li>
                             <li style="font-size: 14px; display: flex; width: 100%;"><span
                                     style="width: 40%; text-align: left;  "> 5. ฌกส. / ฌกส.(พิเศษ)
-                                </span> <span
-                                    style="width: 42%; text-align: right; padding-right: 3%;"><?php echo ''.$_SESSION["exp5"]. ' '; ?></span><span
-                                    style="width: 12%; text-align: right; ">บาท</span>
+                                </span>
+                                <span style="width: 42%; text-align: right; padding-right: 3%; ">
+                                    <?php echo ' '.$_SESSION["exp5"]. ' '; ?>
+                                    +
+                                    <?php echo ' '.$_SESSION["exp5_1"]. ' '; ?>
+                                </span>
+                                <span style="width: 12%; text-align: right; ">บาท</span>
                             </li>
                             <li style="font-size: 14px; display: flex; width: 100%;"><span
                                     style="width: 40%; text-align: left;  "> 6. สหกรณ์ </span>

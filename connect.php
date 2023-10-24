@@ -1,4 +1,14 @@
 <?Php
+
+mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+
+date_default_timezone_set("Asia/Bangkok");
+$connect= mysqli_connect("localhost","root","","ls_payslip"); 
+// Check connection
+if ($connect -> connect_errno) {
+  echo "Failed to connect to MySQL: " . $connect -> connect_error;
+  exit();
+} 
 /*
 //error_reporting(E_ERROR | E_PARSE | E_CORE_ERROR);
 $dbhost_name = "localhost";
@@ -30,14 +40,4 @@ if (!$conn) {
     echo "Connection failed!";
 }
 */
-mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-
-date_default_timezone_set("Asia/Bangkok");
-$connect= mysqli_connect("localhost","root","","ls_payslip"); 
-// Check connection
-if ($connect -> connect_errno) {
-  echo "Failed to connect to MySQL: " . $connect -> connect_error;
-  exit();
-} 
-
 ?>
