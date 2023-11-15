@@ -334,6 +334,7 @@ if(!empty($_GET['status'])){
                                     Upload
                                     เงินเดือน :
                                     <span><input id="" type="file" name="xlsx_file" accept=".xlsx">
+                                        <input type="hidden" id="imdetail" name="imdetail">
                                         <input class="form-control" name="importdetail" type="submit"
                                             data-loading-text="Loading..." value="submit"></span>
 

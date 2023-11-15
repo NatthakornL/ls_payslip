@@ -1,7 +1,7 @@
-<?php 
+<?php
 session_start();
 require "connect.php";
-error_reporting(E_ALL ^ E_WARNING); 
+error_reporting(E_ALL ^ E_WARNING);
 $noman = $_REQUEST['noman'];
 
 
@@ -29,98 +29,98 @@ $noman = $_REQUEST['noman'];
 
 </head>
 <style>
-@viewport {
-    width: device-width;
-    zoom: 1.0;
-}
+    @viewport {
+        width: device-width;
+        zoom: 1.0;
+    }
 
-@-ms-viewport {
-    width: device-width;
-}
+    @-ms-viewport {
+        width: device-width;
+    }
 
-table {
-    border: 1px solid #bdc3c7;
-    border-collapse: collapse;
-    text-align: center;
-    width: 90%;
-    border-color: #000;
-    border-spacing: 0;
-}
+    table {
+        border: 1px solid #bdc3c7;
+        border-collapse: collapse;
+        text-align: center;
+        width: 90%;
+        border-color: #000;
+        border-spacing: 0;
+    }
 
-td {
-    text-align: center;
-    font-size: 15px;
-    height: auto;
-    border: 1px solid #000;
-}
+    td {
+        text-align: center;
+        font-size: 15px;
+        height: auto;
+        border: 1px solid #000;
+    }
 
-.txtidcard {
-    padding: 5px;
-    width: 56%;
-    height: 30px;
-    border: 1px solid;
-    border-radius: 5px;
-    font-size: 16px;
-}
+    .txtidcard {
+        padding: 5px;
+        width: 56%;
+        height: 30px;
+        border: 1px solid;
+        border-radius: 5px;
+        font-size: 16px;
+    }
 
-.txtpass {
-    padding: 5px;
-    width: 56%;
-    height: 30px;
-    border: 1px solid;
-    border-radius: 5px;
-    font-size: 16px;
-}
+    .txtpass {
+        padding: 5px;
+        width: 56%;
+        height: 30px;
+        border: 1px solid;
+        border-radius: 5px;
+        font-size: 16px;
+    }
 </style>
 <script>
-function funClear() {
-    document.getElementById("form1").reset();
-    window.location = "admin.php";
-}
+    function funClear() {
+        document.getElementById("form1").reset();
+        window.location = "admin.php";
+    }
 </script>
 <script src="ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script type="text/javascript">
-$(function() {
-    //ถ้าต้องการใช้งาน auto logout ด้วย ajax  ให้เอา comment ส่วนนี้ออก    
-    setInterval(function() { // กำหนดการทำงานทุกกี่วินาที
-        $.post("check_session.php", function(data) { // เรียกไฟล์ตรวจสอบ session
-            if (data == 1) { // เมื่อ session ถูกทำลายแล้ว
-                window.location = "login.php"; // ส่งไปหน้า login.php  
-            }
-        });
-    }, 60000); // กำหนดวินาที ที่ต้องการ ทุก 1 นาทีหรือ 60000 ก็ได้ ตัวอย่างกำหนดแค่ทุกๆ 5 วินาที
-});
+    $(function() {
+        //ถ้าต้องการใช้งาน auto logout ด้วย ajax  ให้เอา comment ส่วนนี้ออก    
+        setInterval(function() { // กำหนดการทำงานทุกกี่วินาที
+            $.post("check_session.php", function(data) { // เรียกไฟล์ตรวจสอบ session
+                if (data == 1) { // เมื่อ session ถูกทำลายแล้ว
+                    window.location = "login.php"; // ส่งไปหน้า login.php  
+                }
+            });
+        }, 60000); // กำหนดวินาที ที่ต้องการ ทุก 1 นาทีหรือ 60000 ก็ได้ ตัวอย่างกำหนดแค่ทุกๆ 5 วินาที
+    });
 </script>
 <script>
-// Function เพื่อตรวจสอบรหัสผ่านว่าตรงกันหรือไม่
-function checkPassword(form) {
-    resetPassword = form.resetPassword.value;
-    confirm_reset = form.confirm_reset.value;
+    // Function เพื่อตรวจสอบรหัสผ่านว่าตรงกันหรือไม่
+    function checkPassword(form) {
+        resetPassword = form.resetPassword.value;
+        confirm_reset = form.confirm_reset.value;
 
-    // ถ้าช่่องรหัสผ่านไม่ถูกกรอก
-    if (resetPassword == '')
-        alert("กรุณาใส่รหัสผ่าน!!!");
+        // ถ้าช่่องรหัสผ่านไม่ถูกกรอก
+        if (resetPassword == '')
+            alert("กรุณาใส่รหัสผ่าน!!!");
 
-    // ถ้าช่่องยืนยันรหัสผ่านไม่ถูกกรอก
-    else if (confirm_reset == '')
-        alert("กรุณาใส่รหัสผ่านอีกครั้ง!!!");
+        // ถ้าช่่องยืนยันรหัสผ่านไม่ถูกกรอก
+        else if (confirm_reset == '')
+            alert("กรุณาใส่รหัสผ่านอีกครั้ง!!!");
 
-    //ถ้าทั้งสองช่องไม่ตรงกัน   ให้แจ้งผู้ใช้  และ  return false
-    else if (resetPassword != confirm_reset) {
-        alert("\nรหัสผ่านไม่ตรงกัน!!! กรุณาลองใหม่อีกครั้ง!!!")
-        return false;
+        //ถ้าทั้งสองช่องไม่ตรงกัน   ให้แจ้งผู้ใช้  และ  return false
+        else if (resetPassword != confirm_reset) {
+            alert("\nรหัสผ่านไม่ตรงกัน!!! กรุณาลองใหม่อีกครั้ง!!!")
+            return false;
+        }
+
+        //ถ้าทั้งสองช่องตรงกัน  return true
+        else {
+            Swal.fire(
+                'Success!!!',
+                'รีเซ็ตรหัสผ่านเรียบร้อยเเล้ว!!!',
+                'ตกลง'
+            )
+            return true;
+        }
     }
-
-    //ถ้าทั้งสองช่องตรงกัน  return true
-    else {
-        Swal.fire(
-            'Success!!!',
-            'รีเซ็ตรหัสผ่านเรียบร้อยเเล้ว!!!',
-            'ตกลง'
-        )
-        return true;
-    }
-}
 </script>
 
 <div class="background">
@@ -135,92 +135,76 @@ function checkPassword(form) {
                             </div>
                         </div>
                     </header>
-                    <div
-                        style="margin-top: 10px; padding: 1%; width: 100%; height: auto; border: 1px solid #FF6100; border-radius: 10px;">
+                    <div style="margin-top: 10px; padding: 1%; width: 100%; height: auto; border: 1px solid #FF6100; border-radius: 10px;">
 
-                        <?php 
-                            if(isset($_GET['noman'])){
-                                $noman = mysqli_real_escape_string($connect, $_GET['noman']);
+                        <?php
+                        if (isset($_GET['noman'])) {
+                            $noman = mysqli_real_escape_string($connect, $_GET['noman']);
 
-                                $query = "SELECT * FROM tbmain WHERE noman = '".$_GET['noman']."' ";
-                                $result = mysqli_query($connect, $query) or die(mysqli_error($connect));
-                                $row = mysqli_fetch_assoc($result);
+                            $query = "SELECT * FROM tbmain WHERE noman = '" . $_GET['noman'] . "' ";
+                            $result = mysqli_query($connect, $query) or die(mysqli_error($connect));
+                            $row = mysqli_fetch_assoc($result);
 
                         ?>
-                        <input type="hidden" name="noman" value="'.$_GET['noman'].'" />
-                        <div style="width: 100%; text-align: center;">
-                            <span style="font-size: 20px; font-weight: 600;">รีเซ็ตรหัสผ่านใหม่
-                                (Reset Password)
-                                สำหรับเปลี่ยนรหัสคืนค่าให้ผู้ใช้</span><br>
-                        </div>
-                        <li><?php if(isset($message)) { echo $message; } ?></li><br>
-                        <div style="width: 100%; text-align: center;">
-                            <li
-                                style="font-size: 16px; font-weight: 600; text-align: left; padding-left: 20%; padding-right: 14%;">
-                                ลำดับที่ : <span
-                                    style="width: 90%; text-align: left; padding-left: 1%; "><?php echo $row['noman']; ?>
-                                </span>
-                            </li><br>
-                            <li style="margin-left: 20%; text-align: left; font-size: 16px; display: flex; width: 55%;">
-                                <span style="font-weight: 600; width: 29%; ">รหัสบัตรประชาชน
-                                    :
-                                </span>
-                                <span
-                                    style="width: 40%; text-align: left; padding-left: 1%; "><?php echo $row['idno']; ?>
-                                </span>
+                            <input type="hidden" name="noman" value="'.$_GET['noman'].'" />
+                            <div style="width: 100%; text-align: center;">
+                                <span style="font-size: 20px; font-weight: 600;">รีเซ็ตรหัสผ่านใหม่
+                                    (Reset Password)
+                                    สำหรับเปลี่ยนรหัสคืนค่าให้ผู้ใช้</span><br>
+                            </div>
+                            <li><?php if (isset($message)) {
+                                    echo $message;
+                                } ?></li><br>
+                            <div style="width: 100%; text-align: center;">
+                                <li style="font-size: 16px; font-weight: 600; text-align: left; padding-left: 20%; padding-right: 14%;">
+                                    ลำดับที่ : <span style="width: 90%; text-align: left; padding-left: 1%; "><?php echo $row['noman']; ?>
+                                    </span>
+                                </li><br>
+                                <li style="margin-left: 20%; text-align: left; font-size: 16px; display: flex; width: 55%;">
+                                    <span style="font-weight: 600; width: 29%; ">รหัสบัตรประชาชน
+                                        :
+                                    </span>
+                                    <p style="width: 40%; text-align: left; padding-left: 1%; "><?php echo $row['idno']; ?>
+                                    </p>
 
-                            </li><br>
-                            <li style="margin-left: 20%; text-align: left; font-size: 16px; display: flex; width: 55%;">
-                                <span style="font-weight: 600; width: 17%; ">ชื่อ - สกุล :
-                                </span>
-                                <span
-                                    style="width: 90%; text-align: left; padding-left: 1%; "><?php echo $row['nname']; ?>
-                                </span>
-                            </li><br>
-                            <?php 
-                                 
-                                 mysqli_close($connect);
-                             }
-                                ?>
-                            <form method="post" id="form1" onSubmit="return checkPassword(this)"
-                                action="resetpassck.php?noman=<?php echo $noman ?>">
+                                </li><br>
+                                <li style="margin-left: 20%; text-align: left; font-size: 16px; display: flex; width: 55%;">
+                                    <span style="font-weight: 600; width: 17%; ">ชื่อ - สกุล :
+                                    </span>
+                                    <span style="width: 90%; text-align: left; padding-left: 1%; "><?php echo $row['nname']; ?>
+                                    </span>
+                                </li><br>
+                            <?php
+
+                            mysqli_close($connect);
+                        }
+                            ?>
+                            <form method="post" id="form1" onSubmit="return checkPassword(this)" action="resetpassck.php?noman=<?php echo $noman ?>">
                                 <input type="hidden" name="reset_password" value="1" />
                                 <input name="noman" type="hidden" value="<?php echo $row['noman']; ?>" />
                                 <?php
-                                echo '<p style="color:#FF0000;">'.$status.'</p>';
+                                echo '<p style="color:#FF0000;">' . $status . '</p>';
                                 ?>
-                                <li
-                                    style="font-size: 16px; font-weight: 600; text-align: left; padding-left: 20%; padding-right: 14%;">
-                                    กำหนดรหัสผ่านใหม่ : <span style="padding-left: 19px;"><input class="txtidcard"
-                                            type="password" name="resetPassword" maxlength="16" required
-                                            pattern="^[a-zA-Z0-9\s]+$"
-                                            title="กรุณากรอกตัวเลขเเละภาษาอังกฤษเท่านั้น" /></span>
+                                <li style="font-size: 16px; font-weight: 600; text-align: left; padding-left: 20%; padding-right: 14%;">
+                                    กำหนดรหัสผ่านใหม่ : <span style="padding-left: 19px;"><input class="txtidcard" type="password" name="resetPassword" maxlength="16" required pattern="^[a-zA-Z0-9\s]+$" title="กรุณากรอกตัวเลขเเละภาษาอังกฤษเท่านั้น" /></span>
                                 </li><br>
-                                <!--[<?php //echo $noman ?>]-->
-                                <li
-                                    style="font-size: 16px; font-weight: 600; text-align: left; padding-left: 20%; padding-right: 14%;">
-                                    ยืนยันรหัสผ่านอีกครั้ง : <span style="padding-left: 10px;"><input class="txtpass "
-                                            type="password" name="confirm_reset" maxlength="16" required
-                                            pattern="^[a-zA-Z0-9\s]+$"
-                                            title="กรุณากรอกตัวเลขเเละภาษาอังกฤษเท่านั้น" /></span><br><b
-                                        style="color: red; padding-left: 28%">*ใส่รหัสเหมือนช่องบน*</b></li><br>
-                        </div>
+                                <!--[<?php //echo $noman 
+                                        ?>]-->
+                                <li style="font-size: 16px; font-weight: 600; text-align: left; padding-left: 20%; padding-right: 14%;">
+                                    ยืนยันรหัสผ่านอีกครั้ง : <span style="padding-left: 10px;"><input class="txtpass " type="password" name="confirm_reset" maxlength="16" required pattern="^[a-zA-Z0-9\s]+$" title="กรุณากรอกตัวเลขเเละภาษาอังกฤษเท่านั้น" /></span><br><b style="color: red; padding-left: 28%">*ใส่รหัสเหมือนช่องบน*</b></li><br>
+                            </div>
 
-                        <div style="width: 100%; text-align: center;">
-                            <li><input class="btnaddata" type="submit" name="reset_password" onclick="//update()"
-                                    value="เเก้ไขรหัสผ่าน"
-                                    style="cursor: pointer; border: 1px solid #000; background-color: #68DD00; border-radius: 5px; width: 100px; height: 30px; margin: auto;  align-items: center; justify-content: center; overflow-x: hidden; color: #fff; font-size: 16px;">
-                                <span style="margin-left: 3%;"><input class="btnaddata" type="button" name=""
-                                        id="butcancel" value="ยกเลิก" onclick="funClear()"
-                                        style="cursor: pointer; border: 1px solid #000; background-color: #DD3600; border-radius: 5px; width: 100px; height: 30px; margin: auto;  align-items: center; justify-content: center; overflow-x: hidden; color: #fff; font-size: 16px;">
-                                </span>
+                            <div style="width: 100%; text-align: center;">
+                                <li><input class="btnaddata" type="submit" name="reset_password" onclick="//update()" value="เเก้ไขรหัสผ่าน" style="cursor: pointer; border: 1px solid #000; background-color: #68DD00; border-radius: 5px; width: 100px; height: 30px; margin: auto;  align-items: center; justify-content: center; overflow-x: hidden; color: #fff; font-size: 16px;">
+                                    <span style="margin-left: 3%;"><input class="btnaddata" type="button" name="" id="butcancel" value="ยกเลิก" onclick="funClear()" style="cursor: pointer; border: 1px solid #000; background-color: #DD3600; border-radius: 5px; width: 100px; height: 30px; margin: auto;  align-items: center; justify-content: center; overflow-x: hidden; color: #fff; font-size: 16px;">
+                                    </span>
 
-                            </li><br>
-                        </div>
+                                </li><br>
+                            </div>
 
-                        </form>
-                        <?php 
-                        /*
+                            </form>
+                            <?php
+                            /*
                         error_reporting(0);
                         include ('connect.php');
                         if($_GET['reset_password']){
@@ -254,7 +238,7 @@ function checkPassword(form) {
                                             echo "ไม่สามารถบันทึกข้อมูลได้!!!";
                                         }
                                         */
-                        ?>
+                            ?>
                     </div><br>
                 </div>
                 <!--END card body-->

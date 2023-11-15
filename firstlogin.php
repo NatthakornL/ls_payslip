@@ -1,10 +1,10 @@
-<?php 
+<?php
 include "include/session.php";
 include "connect.php";
 include "check.php";
 include("session_expire.php");
-setSessionTime(300,"login.php",null,$_SESSION['idno'],true);
-error_reporting(E_ALL ^ E_WARNING); 
+setSessionTime(300, "login.php", null, $_SESSION['idno'], true);
+error_reporting(E_ALL ^ E_WARNING);
 ?>
 
 <html lang="en">
@@ -169,11 +169,12 @@ td {
                                 คุณ
                                 : <span
                                     style="font-size: 16px; font-weight: 600; text-align: left; padding-left: 1%; width: 50%; ">
-                                    <?php echo ''.$_SESSION["nname"]. ' '; ?></span>
+                                    <?php echo '' . $_SESSION["nname"] . ' '; ?></span>
                                 <b style="margin-left: 3%;">ตำเเหน่ง
                                     : </b><span
                                     style=" font-size: 16px; font-weight: 600; text-align: left; padding-left: 1%; width: 50%; ">
-                                    <?php if($_SESSION["noffice"]=='0'){
+                                    <?php echo '' . $_SESSION["noffice"] . ' ';
+                                    /*if($_SESSION["noffice"]=='0'){
                                 echo "พนักงานราชการ";
                             }else if($_SESSION["noffice"]=='1'){
                                 echo "ลูกจ้างชั่วคราวเงินบำรุง";
@@ -181,7 +182,8 @@ td {
                                 echo "พนักงานกระทรวงสาธารณสุข";
                             }else{
                                 exit();
-                            } ?></span>
+                            }
+                            */ ?></span>
                             </li><br>
 
                             <li
@@ -191,7 +193,9 @@ td {
                                     เฉพาะตัวคุณ
                                     เเละเข้าสู่ระบบอีกครั้ง</span>
                             </li>
-                            <li><?php if(isset($message)) { echo $message; } ?></li><br>
+                            <li><?php if (isset($message)) {
+                                    echo $message;
+                                } ?></li><br>
                             <li
                                 style="font-size: 16px; font-weight: 600; text-align: left; padding-left: 20%; padding-right: 14%;">
                                 กรอกรหัสผ่านเดิม : <span style="padding-left: 33px;"><input class="txtidcard"

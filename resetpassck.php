@@ -17,41 +17,40 @@
 
 
     <?php
-session_id();
-session_start();
-include 'connect.php';
-mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-$noman = $_GET['noman'];
+    session_id();
+    session_start();
+    include 'connect.php';
+    mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+    $noman = $_GET['noman'];
 
-/*
+    /*
 if(isset($_GET['noman'])){
     $sql = "SELECT * FROM tbmain WHERE noman = {$_GET['noman']} ";
     $result = mysqli_query($connect, $sql);
     $row = mysqli_fetch_array($result);
 }
 */
-//UPDATE 
-$status = "";
-if(isset($_POST['reset_password'])){
+    //UPDATE 
+    $status = "";
+    if (isset($_POST['reset_password'])) {
 
-    //$noman = $_SESSION['noman'];
-    $resetPassword = $_POST['resetPassword'];
-    $confirm_reset = $_POST['confirm_reset'];
+        //$noman = $_SESSION['noman'];
+        $resetPassword = $_POST['resetPassword'];
+        $confirm_reset = $_POST['confirm_reset'];
 
-    
-    $select = "SELECT * FROM tbmain WHERE noman='$noman' ";
-    $sql = mysqli_query($connect, $select) or die(mysqli_error($connect));
-    $row = mysqli_fetch_assoc($sql);
 
-    if($resetPassword == $confirm_reset){
-    $store_password = $resetPassword;
+        $select = "SELECT * FROM tbmain WHERE idno='$idno' ";
+        $sql = mysqli_query($connect, $select) or die(mysqli_error($connect));
+        $row = mysqli_fetch_assoc($sql);
 
-    $update = "UPDATE tbmain SET passc = '$store_password' , chn='0', dayup=now() WHERE
+        if ($resetPassword == $confirm_reset) {
+            $store_password = $resetPassword;
+
+            $update = "UPDATE tbmain SET passc = '$store_password' , chn='0', dayup=now() WHERE
     noman = {$_GET['noman']} ";
-    $up = mysqli_query($connect, $update) or die(mysqli_error($connect));
-    if($up)
-    {
-        echo "<script>
+            $up = mysqli_query($connect, $update) or die(mysqli_error($connect));
+            if ($up) {
+                echo "<script>
         $(function() {
     
             Swal.fire({
@@ -75,10 +74,8 @@ if(isset($_POST['reset_password'])){
             })
         });
         </script>";
-    }
-    else
-    {
-        echo "<script>
+            } else {
+                echo "<script>
         $(function() {
     
             Swal.fire({
@@ -102,15 +99,15 @@ if(isset($_POST['reset_password'])){
             })
         });
         </script>";
-    }
-}/*else{
+            }
+        }/*else{
     echo "<script>
         alert('เกิดปัญหาในการรีเซ็ตรหัสผ่าน!!!');
         window.location = 'resetpass.php'
 </script>";
 }*/
-}
-?>
+    }
+    ?>
 </body>
 
 </html>

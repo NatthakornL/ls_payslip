@@ -1,10 +1,11 @@
-<?php 
+<?php
 session_id();
 session_start();
 include "connect.php";
 include "check.php";
 include("session_expire.php");
-setSessionTime(300,"login.php",null,$_SESSION['idno'],true);
+setSessionTime(300, "login.php", null, $_SESSION['idno'], true);
+
 error_reporting(E_ALL ^ E_WARNING);
 ?>
 <html lang="en">
@@ -26,86 +27,86 @@ error_reporting(E_ALL ^ E_WARNING);
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-    $(document).ready(function() {
-        var btn = $('#backToTop');
-        $(window).on('scroll', function() {
-            if ($(window).scrollTop() > 300) {
-                btn.addClass('show');
-            } else {
-                btn.removeClass('show');
-            }
+        $(document).ready(function() {
+            var btn = $('#backToTop');
+            $(window).on('scroll', function() {
+                if ($(window).scrollTop() > 300) {
+                    btn.addClass('show');
+                } else {
+                    btn.removeClass('show');
+                }
+            });
+            btn.on('click', function(e) {
+                e.preventDefault();
+                $('html, body').animate({
+                    scrollTop: 0
+                }, '300');
+            });
         });
-        btn.on('click', function(e) {
-            e.preventDefault();
-            $('html, body').animate({
-                scrollTop: 0
-            }, '300');
-        });
-    });
     </script>
     <script>
-    function funClear() {
-        document.getElementById("form1").reset();
-    }
+        function funClear() {
+            document.getElementById("form1").reset();
+        }
     </script>
     <script src="ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script type="text/javascript">
-    $(function() {
-        //ถ้าต้องการใช้งาน auto logout ด้วย ajax  ให้เอา comment ส่วนนี้ออก    
-        setInterval(function() { // กำหนดการทำงานทุกกี่วินาที
-            $.post("check_session.php", function(data) { // เรียกไฟล์ตรวจสอบ session
-                if (data == 1) { // เมื่อ session ถูกทำลายแล้ว
-                    window.location = "login.php"; // ส่งไปหน้า login.php  
-                }
-            });
-        }, 60000); // กำหนดวินาที ที่ต้องการ ทุก 1 นาทีหรือ 60000 ก็ได้ ตัวอย่างกำหนดแค่ทุกๆ 5 วินาที
-    });
+        $(function() {
+            //ถ้าต้องการใช้งาน auto logout ด้วย ajax  ให้เอา comment ส่วนนี้ออก    
+            setInterval(function() { // กำหนดการทำงานทุกกี่วินาที
+                $.post("check_session.php", function(data) { // เรียกไฟล์ตรวจสอบ session
+                    if (data == 1) { // เมื่อ session ถูกทำลายแล้ว
+                        window.location = "login.php"; // ส่งไปหน้า login.php  
+                    }
+                });
+            }, 60000); // กำหนดวินาที ที่ต้องการ ทุก 1 นาทีหรือ 60000 ก็ได้ ตัวอย่างกำหนดแค่ทุกๆ 5 วินาที
+        });
     </script>
     <style>
-    @viewport {
-        width: device-width;
-        zoom: 1.0;
-    }
+        @viewport {
+            width: device-width;
+            zoom: 1.0;
+        }
 
-    @-ms-viewport {
-        width: device-width;
-    }
+        @-ms-viewport {
+            width: device-width;
+        }
 
-    table {
-        border: 1px solid #bdc3c7;
-        border-collapse: collapse;
-        text-align: center;
-        width: 100%;
-        border-color: #000;
-        border-spacing: 0;
-    }
+        table {
+            border: 1px solid #bdc3c7;
+            border-collapse: collapse;
+            text-align: center;
+            width: 100%;
+            border-color: #000;
+            border-spacing: 0;
+        }
 
-    td {
-        text-align: center;
-        font-size: 15px;
-        height: auto;
-        border: 1px solid #000;
-    }
+        td {
+            text-align: center;
+            font-size: 15px;
+            height: auto;
+            border: 1px solid #000;
+        }
 
-    .txtidcard {
-        padding: 5px;
-        width: 56%;
-        height: 30px;
-        border: 1px solid;
-        border-radius: 5px;
-        font-size: 16px;
-        vertical-align: top;
-    }
+        .txtidcard {
+            padding: 5px;
+            width: 56%;
+            height: 30px;
+            border: 1px solid;
+            border-radius: 5px;
+            font-size: 16px;
+            vertical-align: top;
+        }
 
-    .txtpass {
-        padding: 5px;
-        width: 56%;
-        height: 30px;
-        border: 1px solid;
-        border-radius: 5px;
-        font-size: 16px;
-        vertical-align: top;
-    }
+        .txtpass {
+            padding: 5px;
+            width: 56%;
+            height: 30px;
+            border: 1px solid;
+            border-radius: 5px;
+            font-size: 16px;
+            vertical-align: top;
+        }
     </style>
 </head>
 
@@ -121,147 +122,86 @@ error_reporting(E_ALL ^ E_WARNING);
                             </div>
                         </div>
                     </header>
-                    <div
-                        style="margin-top: 10px; padding: 1%; width: 100%; height: auto; border: 1px solid #FF6100; border-radius: 10px;">
+                    <div style="margin-top: 10px; padding: 1%; width: 100%; height: auto; border: 1px solid #FF6100; border-radius: 10px;">
                         <form method="post" action="" enctype="multipart/form-data">
 
-                            <li style="font-size: 20px; font-weight: 600; text-align: center; color: #FFA200;"><i
-                                    class="em em-page_facing_up" aria-role="presentation"
-                                    aria-label="PAGE FACING UP"></i>
-                                ตารางเเสดงข้อมูลสลิปเงินเดือนของเเต่ละเดือน<i class="em em-page_facing_up"
-                                    aria-role="presentation" aria-label="PAGE FACING UP"></i></li><br>
+                            <li style="font-size: 20px; font-weight: 600; text-align: center; color: #FFA200;"><i class="em em-page_facing_up" aria-role="presentation" aria-label="PAGE FACING UP"></i>
+                                ตารางเเสดงข้อมูลสลิปเงินเดือนของเเต่ละเดือน<i class="em em-page_facing_up" aria-role="presentation" aria-label="PAGE FACING UP"></i></li><br>
 
-                            <li
-                                style="padding-left: 24%; text-align: center; font-size: 16px; display: flex; width: 100%; ">
+                            <li style="padding-left: 24%; text-align: center; font-size: 16px; display: flex; width: 100%; ">
                                 <span style="font-weight: 600; width: 18%; ">ชื่อ - นามสกุล :
                                 </span>
-                                <span
-                                    style="width: 70%; text-align: left; padding-right: 3%; "><?php echo ''.$_SESSION["nname"]. ' '; ?>
+                                <span style="width: 70%; text-align: left; padding-right: 3%; "><?php echo '' . $_SESSION["nname"] . ' '; ?>
                                 </span>
                             </li>
                             <li style="margin-left: 25%; font-size: 16px; display: flex; width: 70%; height: auto;">
                                 <span style="font-weight: 600; width: 12%;">ตำเเหน่ง : </span>
                                 <span style="width: 40%; text-align: left; padding-left: 2px; padding-right: 3%;">
-                                    <?php if($_SESSION["noffice"]=='0'){
-                                echo "พนักงานราชการ";
-                            }else if($_SESSION["noffice"]=='1'){
-                                echo "ลูกจ้างชั่วคราวเงินบำรุง";
-                            }else if ($_SESSION["noffice"]=='2'){
-                                echo "พนักงานกระทรวงสาธารณสุข";
-                            }else{
-                                exit();
-                            } ?>
+                                    <?php echo '' . $_SESSION["noffice"] . ' '; ?>
                                 </span>
-                                <span style="font-weight: 600;">หน่วยงาน : </span> <span
-                                    style="width: 30%; text-align: left; padding-left: 1%; padding-right: 3%;">โรงพยาบาลเลิดสิน</span>
+                                <span style="font-weight: 600;">หน่วยงาน : </span> <span style="width: 30%; text-align: left; padding-left: 1%; padding-right: 3%;">โรงพยาบาลเลิดสิน</span>
                             </li>
                             <!--------------------LINKZONE---------------------->
                             <div style="display: flex; justify-items: center; justify-content: center;">
-                                <button class="btn btn--radius-2 btn--orange" type="button"><a href="firstlogin.php"
-                                        style="color: #fff;"
-                                        onclick="return confirm('กดยืนยันเพื่อไปยังหน้าเปลี่ยนรหัสผ่าน');">เปลี่ยนรหัสผ่าน</a></button>
+                                <button class="btn btn--radius-2 btn--orange" type="button"><a href="firstlogin.php" style="color: #fff;" onclick="return confirm('กดยืนยันเพื่อไปยังหน้าเปลี่ยนรหัสผ่าน');">เปลี่ยนรหัสผ่าน</a></button>
 
-                                <button class="btn btn--radius-2 btn--red" type="button"><a href="logout.php"
-                                        style="color: #fff;"
-                                        onclick="return confirm('ยืนยันการออกจากระบบ');">ออกจากระบบ</a></button>
+                                <button class="btn btn--radius-2 btn--red" type="button"><a href="logout.php" style="color: #fff;" onclick="return confirm('ยืนยันการออกจากระบบ');">ออกจากระบบ</a></button>
                             </div>
                         </form>
                     </div><br>
                     <!-------------------------------------------------->
 
                     <li style="text-align: center; font-size: 17px; font-weight: 600; color: red; padding-bottom: 1%;">
-                        <i class="em em-exclamation" aria-role="presentation"
-                            aria-label="HEAVY EXCLAMATION MARK SYMBOL"></i>
-                        คลิกชื่อเดือนเพื่อเเสดงรายละเอียดใบเเจ้งเงินเดือน <i class="em em-exclamation"
-                            aria-role="presentation" aria-label="HEAVY EXCLAMATION MARK SYMBOL"></i>
+                        <i class="em em-exclamation" aria-role="presentation" aria-label="HEAVY EXCLAMATION MARK SYMBOL"></i>
+                        คลิกชื่อเดือนเพื่อเเสดงรายละเอียดใบเเจ้งเงินเดือน <i class="em em-exclamation" aria-role="presentation" aria-label="HEAVY EXCLAMATION MARK SYMBOL"></i>
                         <span style="font-size: 16; font-weight: 600;"></span>
                     </li>
-                    <table border="1" bordercolor="#000" align="center" width="100%" border-collapse: collapse;
-                        style="margin: auto; overflow-x: hidden; padding-top: 30px; ">
+                    <table border="1" bordercolor="#000" align="center" width="100%" border-collapse: collapse; style="margin: auto; overflow-x: hidden; padding-top: 30px; ">
                         <thead style="width: 90%; height: auto; border: 1px solid #000;">
-                            <th style="width: 22%; border: 1px solid;">เดือน</th>
-                            <th style="width: 46%; border: 1px solid;">วันที่โอนเงินเข้าบัญชี</th>
-                            <th style="width: 22%;">หมายเหตุ</th>
+                            <th style="width: 30%; border: 1px solid;">เดือน</th>
+                            <th style="width: 40%; border: 1px solid;">วันที่โอนเงินเข้าบัญชี</th>
+                            <th style="width: 30%; border: 1px solid; ">หมายเหตุ</th>
                         </thead>
                         <tbody id="myTable">
-                            <tr>
-                                <td style="text-decoration: underline; "><a
-                                        href="print_payslip.php?noman=<?php echo $_SESSION['noman']; ?>"
-                                        target="_blank">
-                                        <span id="">
-                                            <?php 
 
-                                                if($_SESSION["mm"]=='1'){
-                                                    echo "มกราคม";
-                                                }else if($_SESSION["mm"]=='2'){
-                                                    echo "กุมภาพันธ์";
-                                                }else if ($_SESSION["mm"]=='3'){
-                                                    echo "มีนาคม";
-                                                }
-                                                else if ($_SESSION["mm"]=='4'){
-                                                    echo "เมษายน";
-                                                }
-                                                else if ($_SESSION["mm"]=='5'){
-                                                    echo "พฤษภาคม";
-                                                }
-                                                else if ($_SESSION["mm"]=='6'){
-                                                    echo "มิถุนายน";
-                                                }
-                                                else if ($_SESSION["mm"]=='7'){
-                                                    echo "กรกฎาคม";
-                                                }
-                                                else if ($_SESSION["mm"]=='8'){
-                                                    echo "สิงหาคม";
-                                                }
-                                                else if ($_SESSION["mm"]=='9'){
-                                                    echo "กันยายน";
-                                                }
-                                                else if ($_SESSION["mm"]=='10'){
-                                                    echo "ตุลาคม";
-                                                }
-                                                else if ($_SESSION["mm"]=='11'){
-                                                    echo "พฤศจิกายน";
-                                                }
-                                                else if ($_SESSION["mm"]=='12'){
-                                                    echo "ธันวาคม";
-                                                }else{
-                                                    exit();
-                                                } 
-                                                
-                                            ?>
-                                        </span>
+                            <?php
 
-                                        <span>พ.ศ.</span>
-                                        <span><?php echo ''.$_SESSION["yy"]. ' '; ?></span>
-                                    </a></td>
-                                <td> <?php echo ''.$_SESSION["daypay"]. ' '; ?> </td>
-                                <td> <?php echo ''.$_SESSION["remarks"]. ' '; ?></td>
-                            </tr>
+                            $idno = mysqli_real_escape_string($connect, $_GET['idno']);
+
+                            $sql = "SELECT * FROM tbdetail WHERE idno = '" . $_SESSION['idno'] . "' ORDER BY mm  DESC ";
+                            $result = mysqli_query($connect, $sql) or die(mysqli_error($connect));
+
+
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                //var_dump($row);
+                                //print_r($row);
+                            ?>
+
+                                <?php
+
+                                $monthNames = [
+                                    '1' => "มกราคม", '2' => "กุมภาพันธ์", '3' => "มีนาคม",
+                                    '4' => "เมษายน", '5' => "พฤษภาคม", '6' => "มิถุนายน",
+                                    '7' => "กรกฎาคม", '8' => "สิงหาคม", '9' => "กันยายน",
+                                    '10' => "ตุลาคม", '11' => "พฤศจิกายน", '12' => "ธันวาคม"
+                                ];
+
+                                echo "<tr>";
+                                echo "<td style='text-decoration: underline;'><a href='print_payslip.php?mm=" . $row['mm'] . "' target='_blank'>" . $monthNames[$row['mm']] . " พ.ศ. " . $row['yy'] . "</a></td>";
+                                echo "<td>" . $row['daypay'] . "</td>";
+                                echo "<td>" . $row['remarks'] . "</td>";
+                                echo "</tr>";
+
+                                ?>
+                            <?php } ?>
+
+
                         </tbody>
-                    </table> <br>
-                    <?php
-                /*
-                 } 
-                    mysqli_close($connect);
-                } 
-                */
-                ?>
-                    <li style="text-align: center; color: #bdc3c7;">** ข้อมูลเริ่มต้นเดือน มิถุนายน 2566 **</li>
+                    </table><br>
 
-                    <!------------------------------------------------------>
-
-                    <script>
-                    const month = ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม ", "มิถุนายน ", "กรกฎาคม ",
-                        "สิงหาคม ",
-                        "กันยายน ", "ตุลาคม ",
-                        "พฤศจิกายน ", "ธันวาคม "
-                    ];
+                    <li style=" text-align: center; color: #bdc3c7;">** ข้อมูลเริ่มต้นเดือน พฤษภาคม 2566 **</li>
 
 
-                    const d = new Date();
-                    let name = month[d.getMonth()];
-                    document.getElementById("month").innerHTML = name;
-                    </script>
                 </div>
             </div>
         </div>
@@ -269,83 +209,3 @@ error_reporting(E_ALL ^ E_WARNING);
 </div>
 
 </html>
-
-<!-- 
-    
-
-/*
-                                            if($_SESSION["mm"]=='1'){
-                                echo "มกราคม";
-                            }else if($_SESSION["mm"]=='2'){
-                                echo "กุมภาพันธ์";
-                            }else if ($_SESSION["mm"]=='3'){
-                                echo "มีนาคม";
-                            }
-                            else if ($_SESSION["mm"]=='4'){
-                                echo "เมษายน";
-                            }
-                            else if ($_SESSION["mm"]=='5'){
-                                echo "พฤษภาคม";
-                            }
-                            else if ($_SESSION["mm"]=='6'){
-                                echo "มิถุนายน";
-                            }
-                            else if ($_SESSION["mm"]=='7'){
-                                echo "กรกฎาคม";
-                            }
-                            else if ($_SESSION["mm"]=='8'){
-                                echo "สิงหาคม";
-                            }
-                            else if ($_SESSION["mm"]=='9'){
-                                echo "กันยายน";
-                            }
-                            else if ($_SESSION["mm"]=='10'){
-                                echo "ตุลาคม";
-                            }
-                            else if ($_SESSION["mm"]=='11'){
-                                echo "พฤศจิกายน";
-                            }
-                            else if ($_SESSION["mm"]=='12'){
-                                echo "ธันวาคม";
-                            }else{
-                                exit();
-                            } 
-                            echo $row['mm'];
-                            
-/*
-                            $query = "SELECT * FROM tbdetail.idno FULL OUTER JOIN tb_7.idno WHERE idno = {$idno} ";
-                                            $result = mysqli_query($connect, $query);
-                                            while ($row = mysqli_fetch_array($result)) { 
-                                                if($row["mm"]=='1'){
-                                                    echo "มกราคม";
-                                                }else if($row["mm"]=='2'){
-                                                    echo "กุมภาพันธ์";
-                                                }else if($row["mm"]=='3'){
-                                                    echo "มีนาคม";
-                                                }else if($row["mm"]=='4'){
-                                                    echo "เมษายน";
-                                                }else if($row["mm"]=='5'){
-                                                    echo "พฤษภาคม";
-                                                }else if($row["mm"]=='6'){
-                                                    echo "มิถุนายน";
-                                                }else if($row["mm"]=='7'){
-                                                    echo "กรกฎาคม";
-                                                }else if($row["mm"]=='8'){
-                                                    echo "สิงหาคม";
-                                                }else if($row["mm"]=='9'){
-                                                    echo "กันยายน";
-                                                }else if($row["mm"]=='10'){
-                                                    echo "ตุลาคม";
-                                                }else if($row["mm"]=='11'){
-                                                    echo "พฤศจิกายน";
-                                                }else if($row["mm"]=='12'){
-                                                    echo "ธันวาคม";
-                                                }else{
-                                                    exit();
-                                                }
-                                            ?>
-
-                                            
-                            ?>
-
--->

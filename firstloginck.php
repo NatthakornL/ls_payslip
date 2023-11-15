@@ -16,54 +16,55 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.all.min.js"></script>
     <?php
-   session_start();
-   mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-   error_reporting(E_ALL ^ E_WARNING);
+    session_start();
+    mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+    error_reporting(E_ALL ^ E_WARNING);
 
-   if(isset($_SESSION['noman']) && isset($_SESSION['idno'])){
-    include 'connect.php';
+    if (isset($_SESSION['noman']) && isset($_SESSION['idno'])) {
+        include 'connect.php';
 
-   if(isset($_POST['old_password']) && isset($_POST['currentPassword']) && isset($_POST['confirm_password'])){
-    function validate($data){
-        $data = trim($data);
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
-        return $data;
-    }
+        if (isset($_POST['old_password']) && isset($_POST['currentPassword']) && isset($_POST['confirm_password'])) {
+            function validate($data)
+            {
+                $data = trim($data);
+                $data = stripslashes($data);
+                $data = htmlspecialchars($data);
+                return $data;
+            }
 
-    $old_password = validate($_POST['old_password']);
-    $currentPassword = validate($_POST['currentPassword']);
-    $confirm_password = validate($_POST['confirm_password']);
+            $old_password = validate($_POST['old_password']);
+            $currentPassword = validate($_POST['currentPassword']);
+            $confirm_password = validate($_POST['confirm_password']);
 
-    if(empty($old_password)){
-        echo "<script>
+            if (empty($old_password)) {
+                echo "<script>
         alert('กรุณาใส่รหัสผ่านเก่าด้วย!!!');
         window.location = 'firstlogin.php'
-        </script>";        
-        exit();
-    }else if(empty($currentPassword)){
-        echo "<script>
+        </script>";
+                exit();
+            } else if (empty($currentPassword)) {
+                echo "<script>
         alert('กรุณาใส่รหัสผ่านใหม่ด้วย!!!');
         window.location = 'firstlogin.php'
-        </script>";        
-        exit();
-    }else if($currentPassword !== $confirm_password){
-        echo "<script>
+        </script>";
+                exit();
+            } else if ($currentPassword !== $confirm_password) {
+                echo "<script>
             alert('รหัสผ่านใหม่เเละยืนยันรหัสผ่านไม่ตรงกัน!!!');
             window.location = 'firstlogin.php'
             </script>";
-        exit();
-    }else{
-        $noman = $_SESSION['noman'];
+                exit();
+            } else {
+                $idno = $_SESSION['idno'];
 
-        $sql = "SELECT passc FROM tbmain WHERE noman='$noman' AND passc='$old_password' ";
-        $result = mysqli_query($connect, $sql);
+                $sql = "SELECT passc FROM tbmain WHERE idno='$idno' AND passc='$old_password' ";
+                $result = mysqli_query($connect, $sql);
 
-        if(mysqli_num_rows($result) === 1 ){
+                if (mysqli_num_rows($result) === 1) {
 
-            $sql1 = "UPDATE tbmain SET passc='$currentPassword', chn='1', dayup=now() WHERE noman='$noman' ";
-            mysqli_query($connect, $sql1);
-            echo "<script>
+                    $sql1 = "UPDATE tbmain SET passc='$currentPassword', chn='1', dayup=now() WHERE idno='$idno' ";
+                    mysqli_query($connect, $sql1);
+                    echo "<script>
             $(function() {
         
                 Swal.fire({
@@ -86,10 +87,10 @@
                     window.location = 'login.php';
                 })
             });
-            </script>";            
-            exit();
-        }else{
-            echo "<script>
+            </script>";
+                    exit();
+                } else {
+                    echo "<script>
             $(function() {
         
                 Swal.fire({
@@ -112,21 +113,20 @@
                     window.location = 'firstlogin.php';
                 })
             });
-            </script>";            
+            </script>";
+                    exit();
+                }
+            }
+        } else {
+            header("Location: firstlogin.php");
             exit();
         }
+    } else {
+        header("Location: login.php");
+        exit();
     }
 
-   }else{
-    header("Location: firstlogin.php");
-	exit();
-   } 
-   }else{
-    header("Location: login.php");
-     exit();
-   }
-
-?>
+    ?>
 </body>
 
 </html>
