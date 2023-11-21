@@ -149,6 +149,18 @@ body {
   background-size: contain;
 }
 
+.swal2-popup {
+  font-size: 14px !important;
+  font-family: poppins;
+}
+
+.swal2-styled {
+  padding: 10px 32px 10px 32px !important;
+  margin: 20px 10px 0px 10px !important;
+  width: 170px;
+  height: 45px;
+}
+
 /* ==========================================================================
    #BUTTON
    ========================================================================== */

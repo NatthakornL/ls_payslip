@@ -1,10 +1,11 @@
 <?php
-session_id();
+
 session_start();
+
 include "connect.php";
 include "check.php";
 include("session_expire.php");
-setSessionTime(300, "login.php", null, $_SESSION['idno'], true);
+setSessionTime(60, "login.php", null, $_SESSION['idno'], true);
 
 error_reporting(E_ALL ^ E_WARNING);
 ?>
@@ -168,13 +169,14 @@ error_reporting(E_ALL ^ E_WARNING);
 
                             $idno = mysqli_real_escape_string($connect, $_GET['idno']);
 
-                            $sql = "SELECT * FROM tbdetail WHERE idno = '" . $_SESSION['idno'] . "' ORDER BY mm  DESC ";
+                            $sql = "SELECT * FROM tbdetail WHERE idno = '" . $_SESSION['idno'] . "' ORDER BY mm DESC ";
                             $result = mysqli_query($connect, $sql) or die(mysqli_error($connect));
 
 
                             while ($row = mysqli_fetch_assoc($result)) {
                                 //var_dump($row);
                                 //print_r($row);
+
                             ?>
 
                                 <?php
@@ -187,14 +189,13 @@ error_reporting(E_ALL ^ E_WARNING);
                                 ];
 
                                 echo "<tr>";
-                                echo "<td style='text-decoration: underline;'><a href='print_payslip.php?mm=" . $row['mm'] . "' target='_blank'>" . $monthNames[$row['mm']] . " พ.ศ. " . $row['yy'] . "</a></td>";
+                                echo "<td style='text-decoration: underline;'><a href='print_payslip.php?mm=" . $row['mm'] . " ' target='_blank'>" . $monthNames[$row['mm']] . " พ.ศ. " . $row['yy'] . "</a></td>";
                                 echo "<td>" . $row['daypay'] . "</td>";
                                 echo "<td>" . $row['remarks'] . "</td>";
                                 echo "</tr>";
 
                                 ?>
                             <?php } ?>
-
 
                         </tbody>
                     </table><br>

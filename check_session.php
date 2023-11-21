@@ -1,7 +1,14 @@
 <?php
 session_start();
 include("session_expire.php");
-setSessionTime(60,"login.php",null,$_SESSION['idno'],true);
+setSessionTime(60, "login.php", null, $_SESSION['idno'], true);
+if (!isset($_SESSION)) {
+    session_start();
+} else {
+    session_unset();
+    session_destroy();
+    session_start();
+}
 /*
 setSessionTime(
     เวลาวินาทีของอายุ,
@@ -11,4 +18,3 @@ setSessionTime(
     อัพเดทเวลาล่าสุดอัตโนมัติ
     );
 */
-?>

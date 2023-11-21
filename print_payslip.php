@@ -8,11 +8,16 @@
 
 <?php
 
-session_id();
-session_start();
+
+//session_start();
+//print_r($_SESSION); //print ARRAY()
+
 include 'connect.php';
 error_reporting(E_ALL ^ E_WARNING);
 date_default_timezone_set("Asia/Bangkok");
+setSessionTime(60, NULL, null, $_SESSION['idno'], true);
+
+//ini_set("session.gc_maxlifetime","3600" ); //3600 in minutes.
 
 ?>
 
@@ -52,7 +57,8 @@ date_default_timezone_set("Asia/Bangkok");
 
                         <?php
                         if (isset($_GET['mm'])) {
-                            $result = $connect->query("SELECT * FROM tbdetail WHERE mm = '" . $_GET['mm'] . "'  ");
+                            $sql = "SELECT * FROM tbdetail WHERE mm = '" . $_GET['mm'] . "' ORDER BY idno ";
+                            $result = mysqli_query($connect, $sql);
                             while ($row = $result->fetch_assoc()) {
                         ?>
                         <td style="width: 50%;">
@@ -79,13 +85,13 @@ date_default_timezone_set("Asia/Bangkok");
                         </td>
                         <td style="width: 50%;">
                             <li style="font-size: 14px; display: flex; width: 100%;">โอนเงินเข้าวันที่ :
-                                <span style="padding-left: 1%;"><?php echo '' . $_SESSION["daypay"] . ' '; ?></span>
+                                <span style="padding-left: 1%;"><?php echo '' . $row["daypay"] . ' '; ?></span>
                             </li>
                             <li style="font-size: 14px; display: flex; width: 100%;">ชื่อธนาคาร :
                                 <span style="padding-left: 1%;"><?php echo '' . $_SESSION["nposit"] . ' '; ?></span>
                             </li>
                             <li style="font-size: 14px; display: flex; width: 100%;">เลขที่บัญชี :
-                                <span style="padding-left: 1%;"><?php echo '' . $_SESSION["nobank"] . ' '; ?></span>
+                                <span style="padding-left: 1%;"><?php echo '' . $row["nobank"] . ' '; ?></span>
                             </li>
                         </td>
 
@@ -102,30 +108,30 @@ date_default_timezone_set("Asia/Bangkok");
                             <li style="font-size: 14px; display: flex; width: 100%;"><span
                                     style="width: 40%; text-align: left;  ">1. เงินเดือน
                                 </span><span
-                                    style="width: 42%; text-align: right; padding-right: 3%;"><?php echo '' . $_SESSION["money1"] . ' '; ?></span><span
+                                    style="width: 42%; text-align: right; padding-right: 3%;"><?php echo '' . $row["money1"] . ' '; ?></span><span
                                     style="width: 12%; text-align: right; ">บาท</span>
                             </li>
                             <li style="font-size: 14px; display: flex; width: 100%;"><span
                                     style="width: 40%; text-align: left;  ">2.
                                     เงินเดือน(ตกเบิก)</span> <span
-                                    style="width: 42%; text-align: right; padding-right: 3%; "><?php echo '' . $_SESSION["money2"] . ' '; ?></span><span
+                                    style="width: 42%; text-align: right; padding-right: 3%; "><?php echo '' . $row["money2"] . ' '; ?></span><span
                                     style="width: 12%; text-align: right; ">บาท</span>
                             </li>
                             <li style="font-size: 14px; display: flex; width: 100%;"><span
                                     style="width: 40%; text-align: left;  ">3. ค่าครองชีพ
                                 </span><span
-                                    style="width: 42%; text-align: right; padding-right: 3%; "><?php echo '' . $_SESSION["money3"] . ' '; ?></span><span
+                                    style="width: 42%; text-align: right; padding-right: 3%; "><?php echo '' . $row["money3"] . ' '; ?></span><span
                                     style="width: 12%; text-align: right; ">บาท</span>
                             </li>
                             <li style="font-size: 14px; display: flex; width: 100%;"><span
                                     style="width: 40%; text-align: left; ">4.
                                     ค่าครองชีพ(ตกเบิก)</span> <span
-                                    style="width: 42%; text-align: right; padding-right: 3%; "><?php echo '' . $_SESSION["money4"] . ' '; ?></span><span
+                                    style="width: 42%; text-align: right; padding-right: 3%; "><?php echo '' . $row["money4"] . ' '; ?></span><span
                                     style="width: 12%; text-align: right; ">บาท</span>
                             </li>
                             <li style="font-size: 14px; display: flex; width: 100%;"><span
                                     style="width: 40%; text-align: left;  ">5. อื่นๆ</span> <span
-                                    style="width: 42%; text-align: right; padding-right: 3%; "><?php echo '' . $_SESSION["money5"] . ' '; ?></span><span
+                                    style="width: 42%; text-align: right; padding-right: 3%; "><?php echo '' . $row["money5"] . ' '; ?></span><span
                                     style="width: 12%; text-align: right; ">บาท</span>
                             </li>
                             <!---------------SPACE----------------->
@@ -138,7 +144,7 @@ date_default_timezone_set("Asia/Bangkok");
                             <li style="font-size: 14px; display: flex; width: 100%;"><span
                                     style="width: 40%; text-align: left;  ">รวมรับทั้งหมด
                                 </span><span
-                                    style="width: 42%; text-align: right; padding-right: 3%;"><?php echo '' . $_SESSION["sumget"] . ' '; ?></span><span
+                                    style="width: 42%; text-align: right; padding-right: 3%;"><?php echo '' . $row["sumget"] . ' '; ?></span><span
                                     style="width: 12%; text-align: right; ">บาท</span>
                             </li>
 
@@ -147,69 +153,69 @@ date_default_timezone_set("Asia/Bangkok");
                         <td style="margin: auto; width: 50%;">
                             <li style="font-size: 14px; display: flex; width: 100%;"><span
                                     style="width: 40%; text-align: left;  ">1. ปกส. </span> <span
-                                    style="width: 42%; text-align: right; padding-right: 3%; "><?php echo '' . $_SESSION["exp1"] . ' '; ?></span><span
+                                    style="width: 42%; text-align: right; padding-right: 3%; "><?php echo '' . $row["exp1"] . ' '; ?></span><span
                                     style="width: 12%; text-align: right; ">บาท</span>
                             </li>
                             <li style="font-size: 14px; display: flex; width: 100%;"><span
                                     style="width: 40%; text-align: left;  ">2. ปกส.(ตกเบิก)
                                 </span> <span
-                                    style="width: 42%; text-align: right; padding-right: 3%; "><?php echo '' . $_SESSION["exp2"] . ' '; ?></span><span
+                                    style="width: 42%; text-align: right; padding-right: 3%; "><?php echo '' . $row["exp2"] . ' '; ?></span><span
                                     style="width: 12%; text-align: right; ">บาท</span>
                             </li>
                             <li style="font-size: 14px; display: flex; width: 100%;"><span
                                     style="width: 40%; text-align: left;  ">3. กสล.พกส. </span>
                                 <span
-                                    style="width: 42%; text-align: right; padding-right: 3%; "><?php echo '' . $_SESSION["exp3"] . ' '; ?></span><span
+                                    style="width: 42%; text-align: right; padding-right: 3%; "><?php echo '' . $row["exp3"] . ' '; ?></span><span
                                     style="width: 12%; text-align: right; ">บาท</span>
                             </li>
                             <li style="font-size: 14px; display: flex; width: 100%;"><span
                                     style="width: 40%; text-align: left;  ">4. กยศ. </span> <span
-                                    style="width: 42%; text-align: right; padding-right: 3%; "><?php echo '' . $_SESSION["exp4"] . ' '; ?></span><span
+                                    style="width: 42%; text-align: right; padding-right: 3%; "><?php echo '' . $row["exp4"] . ' '; ?></span><span
                                     style="width: 12%; text-align: right; ">บาท</span>
                             </li>
                             <li style="font-size: 14px; display: flex; width: 100%;"><span
                                     style="width: 40%; text-align: left;  "> 5. ฌกส. / ฌกส.(พิเศษ)
                                 </span>
                                 <span style="width: 42%; text-align: right; padding-right: 3%; ">
-                                    <?php echo ' ' . $_SESSION["exp5"] . ' '; ?>
+                                    <?php echo ' ' . $row["exp5"] . ' '; ?>
                                     +
-                                    <?php echo ' ' . $_SESSION["exp5_1"] . ' '; ?>
+                                    <?php echo ' ' . $row["exp5_1"] . ' '; ?>
                                 </span>
                                 <span style="width: 12%; text-align: right; ">บาท</span>
                             </li>
                             <li style="font-size: 14px; display: flex; width: 100%;"><span
                                     style="width: 40%; text-align: left;  "> 6. สหกรณ์ </span>
                                 <span
-                                    style="width: 42%; text-align: right; padding-right: 3%; "><?php echo '' . $_SESSION["exp6"] . ' '; ?></span><span
+                                    style="width: 42%; text-align: right; padding-right: 3%; "><?php echo '' . $row["exp6"] . ' '; ?></span><span
                                     style="width: 12%; text-align: right; ">บาท</span>
                             </li>
                             <li style="font-size: 14px; display: flex; width: 100%;"><span
                                     style="width: 40%; text-align: left; "> 7. สินเชื่อ ธ.กรุงไทย
                                 </span> <span
-                                    style="width: 42%; text-align: right; padding-right: 3%; "><?php echo '' . $_SESSION["exp7"] . ' '; ?></span><span
+                                    style="width: 42%; text-align: right; padding-right: 3%; "><?php echo '' . $row["exp7"] . ' '; ?></span><span
                                     style="width: 12%; text-align: right; ">บาท</span>
                             </li>
                             <li style="font-size: 14px; display: flex; width: 100%;"><span
                                     style="width: 40%; text-align: left; ">8.
                                     สินเชื่อ ธ.ไทยพาณิชย์ </span><span
-                                    style="width: 42%; text-align: right; padding-right: 3%; "><?php echo '' . $_SESSION["exp8"] . ' '; ?></span><span
+                                    style="width: 42%; text-align: right; padding-right: 3%; "><?php echo '' . $row["exp8"] . ' '; ?></span><span
                                     style="width: 12%; text-align: right; ">บาท</span>
                             </li>
                             <li style="font-size: 14px; display: flex; width: 100%;"><span
                                     style="width: 40%; text-align: left;  ">9. สินเชื่อ ธ.ออมสิน
                                 </span><span
-                                    style="width: 42%; text-align: right; padding-right: 3%; "><?php echo '' . $ro_SESSIONw["exp9"] . ' '; ?></span><span
+                                    style="width: 42%; text-align: right; padding-right: 3%; "><?php echo '' . $row["exp9"] . ' '; ?></span><span
                                     style="width: 12%; text-align: right; ">บาท</span>
                             </li>
                             <li style="font-size: 14px; display: flex; width: 100%;"><span
                                     style="width: 40%; text-align: left;  ">10. อื่นๆ </span><span
-                                    style="width: 42%; text-align: right; padding-right: 3%; "><?php echo '' . $_SESSION["exp10"] . ' '; ?></span><span
+                                    style="width: 42%; text-align: right; padding-right: 3%; "><?php echo '' . $row["exp10"] . ' '; ?></span><span
                                     style="width: 12%; text-align: right; ">บาท</span>
                             </li>
                             <li style="font-size: 14px; display: flex; width: 100%;"><span
                                     style="width: 40%; text-align: left; ">รวมหักทั้งหมด
                                 </span><span
-                                    style="width: 42%; text-align: right; padding-right: 3%; "><?php echo '' . $_SESSION["sumpay"] . ' '; ?></span><span
+                                    style="width: 42%; text-align: right; padding-right: 3%; "><?php echo '' . $row["sumpay"] . ' '; ?></span><span
                                     style="width: 12%; text-align: right; ">บาท</span>
                             </li>
                         </td>
@@ -229,10 +235,10 @@ date_default_timezone_set("Asia/Bangkok");
                             <li style="font-size: 14px; display: flex; width: 100%; "><span
                                     style="width: 16%; text-align: left;  ">รวมสุทธิ</span>
                                 <span
-                                    style="width: 25%; text-align: right; padding-right: 3.9%; "><?php echo '' . $_SESSION["sumnet"] . ' '; ?></span><span
+                                    style="width: 25%; text-align: right; padding-right: 3.9%; "><?php echo '' . $row["sumnet"] . ' '; ?></span><span
                                     style="width: 2%; text-align: right; padding-right: 3%;">บาท</span>(
                                 <span style="text-align: center; width: 48%; padding-left: 2px;">
-                                    <?php echo '' . $_SESSION["money4txt"] . ' '; ?><?php echo '' . $_SESSION["money5txt"] . ' '; ?><?php echo '' . $_SESSION["money6txt"] . ' '; ?>
+                                    <?php echo '' . $row["money4txt"] . ' '; ?><?php echo '' . $row["money5txt"] . ' '; ?><?php echo '' . $row["money6txt"] . ' '; ?>
                                 </span>)
                             </li>
 
@@ -265,6 +271,8 @@ date_default_timezone_set("Asia/Bangkok");
             </table>
             <?php }
                             mysqli_close($connect);
+                            session_unset();
+                            session_destroy();
                         } ?>
         </div>
 

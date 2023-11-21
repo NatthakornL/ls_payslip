@@ -3,11 +3,11 @@
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
 date_default_timezone_set("Asia/Bangkok");
-$connect= mysqli_connect("localhost","root","","ls_payslip"); 
+$connect = mysqli_connect("localhost", "root", "", "ls_payslip");
 // Check connection
 if (!$connect) {
   die("Connection failed: " . mysqli_connect_error());
-}
+} 
 /*
 //error_reporting(E_ERROR | E_PARSE | E_CORE_ERROR);
 $dbhost_name = "localhost";

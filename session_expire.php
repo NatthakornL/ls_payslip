@@ -1,56 +1,48 @@
 <?php
-function setSessionTime(
-            $_timeSecond,
-            $url=null,
-            $return=null,
-            $check_access=null,
-            $renewTime=null
-        ){
- 
-    if($check_access==null && $url!=""){
-       header("location:".$url);            
+function setSessionTime($_timeSecond, $url = null, $return = null, $check_access = null, $renewTime = null)
+{
+    if ($check_access == null && $url != "") {
+        header("Location: " . $url);
         exit;
     }
-     
-    $data_back=0; // 0 คือ ยังไม่ล้างตัวแปร 1 คือ ล้างค่าตัวแปรแล้ว
-    if(!isset($_SESSION['ses_time_life'])){
-        $_SESSION['ses_time_life']=time();
+
+    if (!isset($_SESSION['ses_time_life'])) {
+        $_SESSION['ses_time_life'] = time();
     }
-    if(isset($_SESSION['ses_time_life']) && time()-$_SESSION['ses_time_life']>$_timeSecond){
-        if(count($_SESSION)>0){
- 
-            // วนลูป unset ตัวแปร session ทั้งหมด      
-               foreach($_SESSION as $key=>$value){
-                unset($$key);
+
+    $data_back = 0; // Indicates session not cleared (0) or cleared (1)
+
+    if (isset($_SESSION['ses_time_life']) && time() - $_SESSION['ses_time_life'] > $_timeSecond) {
+        if (count($_SESSION) > 0) {
+            // Unset all session variables or specific ones
+            foreach ($_SESSION as $key => $value) {
                 unset($_SESSION[$key]);
-               }
- 
-            //    หรือเฉพาะตัวแปรที่ต้องการ
-//            unset($_SESSION['user']); // กำหนดตัวแปร session อื่นๆ ที่ต้องการ unset ต่อจากนี้ได้
- //           unset($_SESSION['ses_time_life']);  // กรณีกำหนดเฉพาะ ต้องมี บรรทัดนี้ด้วยเสมอ
-             
-            if($return){
-                $data_back=1;
+            }
+
+            // Example: unset specific session variables
+            // unset($_SESSION['idno']);
+
+            // Always unset the session time life
+            unset($_SESSION['ses_time_life']);
+
+            if ($return) {
+                $data_back = 1;
                 return $data_back;
-                exit;
-            }            
- 
-            // ถ้ามีการกำหนด url หลังจาก unset ก็ให้ ลิ้งค์ไปหน้านั้นๆ
-            if($url){
-                header("location:".$url);
+            }
+
+            // Redirect if URL is provided after unsetting session variables
+            if ($url) {
+                header("Location: " . $url);
                 exit;
             }
         }
-    }else{
-        // อัพเดทเป็นเวลาล่าสุด
-        if($renewTime==true){
-            $_SESSION['ses_time_life']=time();
+    } else {
+        // Update session time to the current time if renewTime is set to true
+        if ($renewTime == true) {
+            $_SESSION['ses_time_life'] = time();
         }
-        if($return){
-            $data_back=0;
+        if ($return) {
             return $data_back;
-            exit;
-        }        
+        }
     }
 }
-?>
