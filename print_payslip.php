@@ -8,16 +8,13 @@
 
 <?php
 
-
-//session_start();
-//print_r($_SESSION); //print ARRAY()
-
-include 'connect.php';
+session_id();
+session_start();
+include "connect.php";
+include "check.php";
+include "session_expire.php";
 error_reporting(E_ALL ^ E_WARNING);
 date_default_timezone_set("Asia/Bangkok");
-setSessionTime(60, NULL, null, $_SESSION['idno'], true);
-
-//ini_set("session.gc_maxlifetime","3600" ); //3600 in minutes.
 
 ?>
 
@@ -54,31 +51,35 @@ setSessionTime(60, NULL, null, $_SESSION['idno'], true);
                 <tbody>
                     <tr style="width: 100%;">
                         <!-------trhead------->
-
                         <?php
-                        if (isset($_GET['mm'])) {
-                            $sql = "SELECT * FROM tbdetail WHERE mm = '" . $_GET['mm'] . "' ORDER BY idno ";
+                        if (isset($_GET['mm']) && !empty($_GET['mm']) && isset($_GET['idno']) && !empty($_GET['idno'])) {
+                            // Sanitize inputs to prevent SQL injection
+                            $mm = mysqli_real_escape_string($connect, $_GET['mm']);
+                            $idno = mysqli_real_escape_string($connect, $_GET['idno']);
+
+                            $sql = "SELECT * FROM tbdetail WHERE mm = '$mm' AND idno = '$idno' ORDER BY idno";
                             $result = mysqli_query($connect, $sql);
-                            while ($row = $result->fetch_assoc()) {
+
+                            if ($result) {
+                                while ($row = mysqli_fetch_assoc($result)) {
                         ?>
                         <td style="width: 50%;">
                             <li style="font-size: 14px; display: flex; width: 100%;">ประจำเดือน : <span
                                     style="padding-left: 1%;">
                                     <span id="">
                                         <?php $monthNames = [
-                                                    '1' => "มกราคม", '2' => "กุมภาพันธ์", '3' => "มีนาคม",
-                                                    '4' => "เมษายน", '5' => "พฤษภาคม", '6' => "มิถุนายน",
-                                                    '7' => "กรกฎาคม", '8' => "สิงหาคม", '9' => "กันยายน",
-                                                    '10' => "ตุลาคม", '11' => "พฤศจิกายน", '12' => "ธันวาคม"
-                                                ];
+                                                        '1' => "มกราคม", '2' => "กุมภาพันธ์", '3' => "มีนาคม",
+                                                        '4' => "เมษายน", '5' => "พฤษภาคม", '6' => "มิถุนายน",
+                                                        '7' => "กรกฎาคม", '8' => "สิงหาคม", '9' => "กันยายน",
+                                                        '10' => "ตุลาคม", '11' => "พฤศจิกายน", '12' => "ธันวาคม"
+                                                    ];
 
-                                                $month = $monthNames[$row['mm']];
-                                                echo $monthNames[$row['mm']] . " พ.ศ. " . $row['yy']; ?></span>
+                                                    $month = $monthNames[$row['mm']];
+                                                    echo $monthNames[$row['mm']] . " พ.ศ. " . $row['yy']; ?></span>
 
                                 </span></li>
                             <li style="font-size: 14px; display: flex; width: 100%;">ชื่อ-สกุล : <span
-                                    style="padding-left: 1%;"></span> <?php echo '' . $_SESSION["nname"] . ' '; ?>
-                            </li>
+                                    style="padding-left: 1%;"></span> <?php echo '' . $_SESSION["nname"] . ' '; ?></li>
                             <li style="font-size: 14px; display: flex; width: 100%;">หน่วยงาน :
                                 <span>โรงพยาบาลเลิดสิน</span>
                             </li>
@@ -246,10 +247,8 @@ setSessionTime(60, NULL, null, $_SESSION['idno'], true);
                     </tr>
                 </tbody>
             </table>
-
-
             <table align="center" width="100%" border-collapse: collapse;
-                style="margin: auto; overflow-x: hidden; padding-top: 3%; padding-bottom: 5%;">
+                style="margin: auto; overflow-x: hidden; padding-top: 3.7%; padding-bottom: 3.7%;">
                 <tbody>
                     <tr>
                         <td style="text-align: left; font-size: 16px; font-weight: 600;">
@@ -268,12 +267,18 @@ setSessionTime(60, NULL, null, $_SESSION['idno'], true);
                         </td>
                     </tr>
                 </tbody>
+
             </table>
-            <?php }
-                            mysqli_close($connect);
-                            session_unset();
-                            session_destroy();
-                        } ?>
+            <?php
+                                }
+                            }
+                        } else {
+                            echo "NOT FOUND DATA!!!";
+                        }
+                        mysqli_close($connect);
+
+?>
+
         </div>
 
     </section>

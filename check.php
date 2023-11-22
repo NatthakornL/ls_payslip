@@ -1,6 +1,7 @@
 <?Php
 
 if (!isset($_SESSION['idno'])) {
+  session_destroy();
   echo "<script>
   alert('เข้าสู่ระบบไม่ถูกต้อง!!!');
   window.location = 'login.php'

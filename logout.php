@@ -1,4 +1,5 @@
 <?php
+/*
 //Delete all previous PHPSESSID cookies
 $past = 60 * 60 * 24 * 365 * 10;
 setcookie('PHPSESSID', false, time() - $past);
@@ -6,10 +7,27 @@ setcookie('PHPSESSID', false, time() - $past);
 $_SESSION = array();
 //Delete the old session file (true) and create a new session id
 session_regenerate_id(true);
-if (isset($_COOKIE["username"]) && isset($_COOKIE["password"])) {
+if (isset($_SESSION["username"]) && isset($_SESSION["password"])) {
     setcookie("username", '', time() - 300, '/');
     setcookie("password", '', time() - 300, '/');
 }
+*/
+
+// Start the session
+session_start();
+
+// Clear all session variables
+$_SESSION = array();
+
+// Destroy the session
+session_destroy();
+
+// Unset cookies for 'username' and 'password' if they exist
+if (isset($_COOKIE["username"]) && isset($_COOKIE["password"])) {
+    setcookie("username", '', time() - 3600, '/'); // Expire in the past
+    setcookie("password", '', time() - 3600, '/'); // Expire in the past
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
