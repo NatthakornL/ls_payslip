@@ -109,30 +109,30 @@ date_default_timezone_set("Asia/Bangkok");
                             <li style="font-size: 14px; display: flex; width: 100%;"><span
                                     style="width: 40%; text-align: left;  ">1. เงินเดือน
                                 </span><span
-                                    style="width: 42%; text-align: right; padding-right: 3%;"><?php echo '' . $row["money1"] . ' '; ?></span><span
+                                    style="width: 42%; text-align: right; padding-right: 3%;"><?php echo number_format($row["money1"], 2)  ?></span><span
                                     style="width: 12%; text-align: right; ">บาท</span>
                             </li>
                             <li style="font-size: 14px; display: flex; width: 100%;"><span
                                     style="width: 40%; text-align: left;  ">2.
                                     เงินเดือน(ตกเบิก)</span> <span
-                                    style="width: 42%; text-align: right; padding-right: 3%; "><?php echo '' . $row["money2"] . ' '; ?></span><span
+                                    style="width: 42%; text-align: right; padding-right: 3%; "><?php echo number_format($row["money2"], 2) ?></span><span
                                     style="width: 12%; text-align: right; ">บาท</span>
                             </li>
                             <li style="font-size: 14px; display: flex; width: 100%;"><span
                                     style="width: 40%; text-align: left;  ">3. ค่าครองชีพ
                                 </span><span
-                                    style="width: 42%; text-align: right; padding-right: 3%; "><?php echo '' . $row["money3"] . ' '; ?></span><span
+                                    style="width: 42%; text-align: right; padding-right: 3%; "><?php echo number_format($row["money3"], 2) ?></span><span
                                     style="width: 12%; text-align: right; ">บาท</span>
                             </li>
                             <li style="font-size: 14px; display: flex; width: 100%;"><span
                                     style="width: 40%; text-align: left; ">4.
                                     ค่าครองชีพ(ตกเบิก)</span> <span
-                                    style="width: 42%; text-align: right; padding-right: 3%; "><?php echo '' . $row["money4"] . ' '; ?></span><span
+                                    style="width: 42%; text-align: right; padding-right: 3%; "><?php echo number_format($row["money4"], 2) ?></span><span
                                     style="width: 12%; text-align: right; ">บาท</span>
                             </li>
                             <li style="font-size: 14px; display: flex; width: 100%;"><span
                                     style="width: 40%; text-align: left;  ">5. อื่นๆ</span> <span
-                                    style="width: 42%; text-align: right; padding-right: 3%; "><?php echo '' . $row["money5"] . ' '; ?></span><span
+                                    style="width: 42%; text-align: right; padding-right: 3%; "><?php echo number_format($row["money5"], 2) ?></span><span
                                     style="width: 12%; text-align: right; ">บาท</span>
                             </li>
                             <!---------------SPACE----------------->
@@ -145,7 +145,7 @@ date_default_timezone_set("Asia/Bangkok");
                             <li style="font-size: 14px; display: flex; width: 100%;"><span
                                     style="width: 40%; text-align: left;  ">รวมรับทั้งหมด
                                 </span><span
-                                    style="width: 42%; text-align: right; padding-right: 3%;"><?php echo '' . $row["sumget"] . ' '; ?></span><span
+                                    style="width: 42%; text-align: right; padding-right: 3%;"><?php echo number_format($row["sumget"], 2) ?></span><span
                                     style="width: 12%; text-align: right; ">บาท</span>
                             </li>
 
@@ -154,69 +154,69 @@ date_default_timezone_set("Asia/Bangkok");
                         <td style="margin: auto; width: 50%;">
                             <li style="font-size: 14px; display: flex; width: 100%;"><span
                                     style="width: 40%; text-align: left;  ">1. ปกส. </span> <span
-                                    style="width: 42%; text-align: right; padding-right: 3%; "><?php echo '' . $row["exp1"] . ' '; ?></span><span
+                                    style="width: 42%; text-align: right; padding-right: 3%; "><?php echo number_format($row["exp1"], 2) ?></span><span
                                     style="width: 12%; text-align: right; ">บาท</span>
                             </li>
                             <li style="font-size: 14px; display: flex; width: 100%;"><span
                                     style="width: 40%; text-align: left;  ">2. ปกส.(ตกเบิก)
                                 </span> <span
-                                    style="width: 42%; text-align: right; padding-right: 3%; "><?php echo '' . $row["exp2"] . ' '; ?></span><span
+                                    style="width: 42%; text-align: right; padding-right: 3%; "><?php echo number_format($row["exp2"], 2) ?></span><span
                                     style="width: 12%; text-align: right; ">บาท</span>
                             </li>
                             <li style="font-size: 14px; display: flex; width: 100%;"><span
                                     style="width: 40%; text-align: left;  ">3. กสล.พกส. </span>
                                 <span
-                                    style="width: 42%; text-align: right; padding-right: 3%; "><?php echo '' . $row["exp3"] . ' '; ?></span><span
+                                    style="width: 42%; text-align: right; padding-right: 3%; "><?php echo number_format($row["exp3"], 2) ?></span><span
                                     style="width: 12%; text-align: right; ">บาท</span>
                             </li>
                             <li style="font-size: 14px; display: flex; width: 100%;"><span
-                                    style="width: 40%; text-align: left;  ">4. กยศ. </span> <span
-                                    style="width: 42%; text-align: right; padding-right: 3%; "><?php echo '' . $row["exp4"] . ' '; ?></span><span
+                                    style="width: 40%; text-align: left;  ">4. กยศ./กรอ. </span> <span
+                                    style="width: 42%; text-align: right; padding-right: 3%; "><?php echo number_format($row["exp4"], 2) ?></span><span
                                     style="width: 12%; text-align: right; ">บาท</span>
                             </li>
                             <li style="font-size: 14px; display: flex; width: 100%;"><span
                                     style="width: 40%; text-align: left;  "> 5. ฌกส. / ฌกส.(พิเศษ)
                                 </span>
                                 <span style="width: 42%; text-align: right; padding-right: 3%; ">
-                                    <?php echo ' ' . $row["exp5"] . ' '; ?>
+                                    <?php echo number_format($row["exp5"], 2) ?>
                                     +
-                                    <?php echo ' ' . $row["exp5_1"] . ' '; ?>
+                                    <?php echo number_format($row["exp5_1"], 2) ?>
                                 </span>
                                 <span style="width: 12%; text-align: right; ">บาท</span>
                             </li>
                             <li style="font-size: 14px; display: flex; width: 100%;"><span
                                     style="width: 40%; text-align: left;  "> 6. สหกรณ์ </span>
                                 <span
-                                    style="width: 42%; text-align: right; padding-right: 3%; "><?php echo '' . $row["exp6"] . ' '; ?></span><span
+                                    style="width: 42%; text-align: right; padding-right: 3%; "><?php echo number_format($row["exp6"], 2) ?></span><span
                                     style="width: 12%; text-align: right; ">บาท</span>
                             </li>
                             <li style="font-size: 14px; display: flex; width: 100%;"><span
                                     style="width: 40%; text-align: left; "> 7. สินเชื่อ ธ.กรุงไทย
                                 </span> <span
-                                    style="width: 42%; text-align: right; padding-right: 3%; "><?php echo '' . $row["exp7"] . ' '; ?></span><span
+                                    style="width: 42%; text-align: right; padding-right: 3%; "><?php echo number_format($row["exp7"], 2) ?></span><span
                                     style="width: 12%; text-align: right; ">บาท</span>
                             </li>
                             <li style="font-size: 14px; display: flex; width: 100%;"><span
                                     style="width: 40%; text-align: left; ">8.
                                     สินเชื่อ ธ.ไทยพาณิชย์ </span><span
-                                    style="width: 42%; text-align: right; padding-right: 3%; "><?php echo '' . $row["exp8"] . ' '; ?></span><span
+                                    style="width: 42%; text-align: right; padding-right: 3%; "><?php echo number_format($row["exp8"], 2) ?></span><span
                                     style="width: 12%; text-align: right; ">บาท</span>
                             </li>
                             <li style="font-size: 14px; display: flex; width: 100%;"><span
                                     style="width: 40%; text-align: left;  ">9. สินเชื่อ ธ.ออมสิน
                                 </span><span
-                                    style="width: 42%; text-align: right; padding-right: 3%; "><?php echo '' . $row["exp9"] . ' '; ?></span><span
+                                    style="width: 42%; text-align: right; padding-right: 3%; "><?php echo number_format($row["exp9"], 2) ?></span><span
                                     style="width: 12%; text-align: right; ">บาท</span>
                             </li>
                             <li style="font-size: 14px; display: flex; width: 100%;"><span
                                     style="width: 40%; text-align: left;  ">10. อื่นๆ </span><span
-                                    style="width: 42%; text-align: right; padding-right: 3%; "><?php echo '' . $row["exp10"] . ' '; ?></span><span
+                                    style="width: 42%; text-align: right; padding-right: 3%; "><?php echo number_format($row["exp10"], 2) ?></span><span
                                     style="width: 12%; text-align: right; ">บาท</span>
                             </li>
                             <li style="font-size: 14px; display: flex; width: 100%;"><span
                                     style="width: 40%; text-align: left; ">รวมหักทั้งหมด
                                 </span><span
-                                    style="width: 42%; text-align: right; padding-right: 3%; "><?php echo '' . $row["sumpay"] . ' '; ?></span><span
+                                    style="width: 42%; text-align: right; padding-right: 3%; "><?php echo number_format($row["sumpay"], 2) ?></span><span
                                     style="width: 12%; text-align: right; ">บาท</span>
                             </li>
                         </td>
@@ -236,7 +236,7 @@ date_default_timezone_set("Asia/Bangkok");
                             <li style="font-size: 14px; display: flex; width: 100%; "><span
                                     style="width: 16%; text-align: left;  ">รวมสุทธิ</span>
                                 <span
-                                    style="width: 25%; text-align: right; padding-right: 3.9%; "><?php echo '' . $row["sumnet"] . ' '; ?></span><span
+                                    style="width: 25%; text-align: right; padding-right: 3.9%; "><?php echo number_format($row["sumnet"], 2) ?></span><span
                                     style="width: 2%; text-align: right; padding-right: 3%;">บาท</span>(
                                 <span style="text-align: center; width: 48%; padding-left: 2px;">
                                     <?php echo '' . $row["money4txt"] . ' '; ?><?php echo '' . $row["money5txt"] . ' '; ?><?php echo '' . $row["money6txt"] . ' '; ?>
