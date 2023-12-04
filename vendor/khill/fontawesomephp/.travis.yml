@@ -1,0 +1,41 @@
+language: php
+
+dist: trusty
+
+sudo: false
+
+php:
+  - 5.4
+  - 5.5
+  - 5.6
+  - 7.0
+  - 7.1
+  
+matrix:
+  fast_finish: true
+  include:
+    - php: 5.3
+      dist: precise
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+    - vendor
+
+before_script:
+  - composer self-update
+  - composer install
+
+notifications:
+  email:
+    recipients:
+      - kevinkhill@gmail.com
+    on_success: change # default: change
+    on_failure: always # default: always
+
+script:
+  - mkdir log
+  - phpunit --coverage-clover build/logs/clover.xml
+
+after_script:
+  - php vendor/bin/coveralls -v

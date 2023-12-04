@@ -32,6 +32,10 @@ class ComposerStaticInit1e9f36fcb939ee48305157deecdcbf4f
             'MyCLabs\\Enum\\' => 13,
             'Matrix\\' => 7,
         ),
+        'K' => 
+        array (
+            'Khill\\FontAwesome\\' => 18,
+        ),
         'C' => 
         array (
             'Complex\\' => 8,
@@ -71,6 +75,10 @@ class ComposerStaticInit1e9f36fcb939ee48305157deecdcbf4f
         'Matrix\\' => 
         array (
             0 => __DIR__ . '/..' . '/markbaker/matrix/classes/src',
+        ),
+        'Khill\\FontAwesome\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/khill/fontawesomephp/src',
         ),
         'Complex\\' => 
         array (

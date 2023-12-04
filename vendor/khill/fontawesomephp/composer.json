@@ -1,0 +1,48 @@
+{
+    "name": "khill/fontawesomephp",
+    "description": "PHP wrapper library for the fantastic Font Awesome icon set.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Kevin Hill",
+            "email": "kevinkhill@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "config": {
+        "platform": {
+            "php": "5.3.29"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Khill\\FontAwesome\\": "src/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.8",
+        "squizlabs/php_codesniffer": "~2.5",
+        "satooshi/php-coveralls": "~1.0"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Khill\\FontAwesome\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit -c phpunit.xml",
+        "cs": "phpcs --standard=PSR2 src tests",
+        "cbf" : "phpcbf --standard=PSR2 src tests"
+    },
+    "extra": {
+        "laravel": {
+          "providers": [
+            "Khill\\FontAwesome\\Laravel\\FontAwesomeServiceProvider"
+          ],
+          "aliases": {
+            "FA": "Khill\\FontAwesome\\Laravel\\FontAwesomeFacade"
+          }      
+        }
+    },
+    "minimum-stability": "stable"
+}

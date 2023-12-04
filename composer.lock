@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f01ca2e7ccfd85272670bf19ebc4f1fb",
+    "content-hash": "d083b9d3682ff6e8f82a15a5f951422e",
     "packages": [
         {
             "name": "ezyang/htmlpurifier",
@@ -66,6 +66,59 @@
                 "source": "https://github.com/ezyang/htmlpurifier/tree/v4.17.0"
             },
             "time": "2023-11-17T15:01:25+00:00"
+        },
+        {
+            "name": "khill/fontawesomephp",
+            "version": "2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kevinkhill/FontAwesomePHP.git",
+                "reference": "324fdac57c319f7212d4be2e47f1d03c3f015e1a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kevinkhill/FontAwesomePHP/zipball/324fdac57c319f7212d4be2e47f1d03c3f015e1a",
+                "reference": "324fdac57c319f7212d4be2e47f1d03c3f015e1a",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.8",
+                "satooshi/php-coveralls": "~1.0",
+                "squizlabs/php_codesniffer": "~2.5"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Khill\\FontAwesome\\Laravel\\FontAwesomeServiceProvider"
+                    ],
+                    "aliases": {
+                        "FA": "Khill\\FontAwesome\\Laravel\\FontAwesomeFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Khill\\FontAwesome\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kevin Hill",
+                    "email": "kevinkhill@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PHP wrapper library for the fantastic Font Awesome icon set.",
+            "support": {
+                "issues": "https://github.com/kevinkhill/FontAwesomePHP/issues",
+                "source": "https://github.com/kevinkhill/FontAwesomePHP/tree/2.0"
+            },
+            "time": "2018-06-19T17:27:46+00:00"
         },
         {
             "name": "maennchen/zipstream-php",
