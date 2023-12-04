@@ -99,12 +99,7 @@
                 echo '<br> <a href="logout.php"> Logout </a>';
             } else if ($_SESSION["chn"] == '0') {
                 //กระโดดไปหน้าสมาชิก
-                Header("Location: firstlogin.php"); //ทำต่อเองนะครับ
-                echo '' . $_SESSION["nname"] . ' level = ' . $_SESSION["chn"];
-                echo '<br> <a href="logout.php"> Logout </a>';
-            } else if ($_SESSION["chn"] == '2') {
-                //กระโดดไปหน้าเเอดมิน
-                Header("Location: admin.php"); //ทำต่อเองนะครับ
+                Header("Location: firstlogin1.php"); //ทำต่อเองนะครับ
                 echo '' . $_SESSION["nname"] . ' level = ' . $_SESSION["chn"];
                 echo '<br> <a href="logout.php"> Logout </a>';
             } else {
