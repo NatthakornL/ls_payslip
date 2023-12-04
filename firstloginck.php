@@ -62,7 +62,7 @@
 
                 if (mysqli_num_rows($result) === 1) {
 
-                    $sql1 = "UPDATE tbmain SET passc='$currentPassword', chn='1', dayup=now() WHERE idno='$idno' ";
+                    $sql1 = "UPDATE tbmain SET passc='$confirm_password', chn='1', dayup=now() WHERE idno='$idno' ";
                     mysqli_query($connect, $sql1);
                     echo "<script>
             $(function() {
